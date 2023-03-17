@@ -1,0 +1,157 @@
+System.Net.WebSockets.WebSocketException (0x80004005): An exception caused the WebSocket to enter the Aborted state. Please see the InnerException, if present, for more details.
+   at System.Net.WebSockets.ManagedWebSocket.CloseWithReceiveErrorAndThrowAsync(WebSocketCloseStatus closeStatus, WebSocketError error, String errorMessage, Exception innerException)
+   at System.Net.WebSockets.ManagedWebSocket.ReceiveAsyncPrivate[TResult](Memory`1 payloadBuffer, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask`1.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 111
+   at AWebSocketClient`1.<ConnectAsync>b__10_1() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 74
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 171
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 141
+{"error":{"code":3,"msg":"Invalid JSON: expected value at line 1 column 1"}} len 76
+binance XLMBTC crashed
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 171
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 141
+{"error":{"code":3,"msg":"Invalid JSON: expected value at line 1 column 1"}} len 76
+binance XRPUSDT crashed
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 171
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 141
+{"error":{"code":3,"msg":"Invalid JSON: expected value at line 1 column 1"}} len 76
+binance LTCBTC crashed
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 171
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 141
+{"error":{"code":3,"msg":"Invalid JSON: expected value at line 1 column 1"}} len 76
+binance XRPBTC crashed
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 171
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 141
+{"error":{"code":3,"msg":"Invalid JSON: expected value at line 1 column 1"}} len 76
+binance AAVEBTC crashed
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 171
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 141
+{"error":{"code":3,"msg":"Invalid JSON: expected value at line 1 column 1"}} len 76
+binance ETHUSDT crashed
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 171
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 141
+{"error":{"code":3,"msg":"Invalid JSON: expected value at line 1 column 1"}} len 76
+binance LINKBTC crashed
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 171
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 141
+{"error":{"code":3,"msg":"Invalid JSON: expected value at line 1 column 1"}} len 76
+binance BTCUSDT crashed
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 171
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 141
+{"error":{"code":3,"msg":"Invalid JSON: expected value at line 1 column 1"}} len 76
+binance OMGBTC crashed
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 171
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 141
+{"error":{"code":3,"msg":"Invalid JSON: expected value at line 1 column 1"}} len 76
+binance UNIBTC crashed
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 171
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 141
+{"error":{"code":3,"msg":"Invalid JSON: expected value at line 1 column 1"}} len 76
+binance BCHBTC crashed
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 171
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 141
+{"error":{"code":3,"msg":"Invalid JSON: expected value at line 1 column 1"}} len 76
+binance ADABTC crashed
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 171
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 141
+{"error":{"code":3,"msg":"Invalid JSON: expected value at line 1 column 1"}} len 76
+binance ETHBTC crashed
+System.Net.WebSockets.WebSocketException (0x80004005): An exception caused the WebSocket to enter the Aborted state. Please see the InnerException, if present, for more details.
+   at System.Net.WebSockets.ManagedWebSocket.CloseWithReceiveErrorAndThrowAsync(WebSocketCloseStatus closeStatus, WebSocketError error, String errorMessage, Exception innerException)
+   at System.Net.WebSockets.ManagedWebSocket.ReceiveAsyncPrivate[TResult](Memory`1 payloadBuffer, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask`1.GetTaskForValueTaskSource(IValueTaskSource`1 t)
+--- End of stack trace from previous location ---
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 111
+   at AWebSocketClient`1.<ConnectAsync>b__10_1() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 74
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 171
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 141
+{"error":{"code":3,"msg":"Invalid JSON: expected value at line 1 column 1"}} len 76
+binance XLMBTC crashed
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 171
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 141
+{"error":{"code":3,"msg":"Invalid JSON: expected value at line 1 column 1"}} len 76
+binance XRPUSDT crashed
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 171
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 141
+{"error":{"code":3,"msg":"Invalid JSON: expected value at line 1 column 1"}} len 76
+binance LTCBTC crashed
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 171
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 141
+{"error":{"code":3,"msg":"Invalid JSON: expected value at line 1 column 1"}} len 76
+binance XRPBTC crashed
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 171
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 141
+{"error":{"code":3,"msg":"Invalid JSON: expected value at line 1 column 1"}} len 76
+binance AAVEBTC crashed
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 171
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 141
+{"error":{"code":3,"msg":"Invalid JSON: expected value at line 1 column 1"}} len 76
+binance ETHUSDT crashed
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 171
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 141
+{"error":{"code":3,"msg":"Invalid JSON: expected value at line 1 column 1"}} len 76
+binance BTCUSDT crashed
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 171
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 141
+{"error":{"code":3,"msg":"Invalid JSON: expected value at line 1 column 1"}} len 76
+binance LINKBTC crashed
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 171
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 141
+{"error":{"code":3,"msg":"Invalid JSON: expected value at line 1 column 1"}} len 76
+binance OMGBTC crashed
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 171
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 141
+{"error":{"code":3,"msg":"Invalid JSON: expected value at line 1 column 1"}} len 76
+binance UNIBTC crashed
+System.Exception:  invalid message 
+   at BinanceWs.MessageType(BinanceBasicObject message, ObjectDecoder obj) in C:\Users\liam-\source\repos\CyptoSeller\DataGather\binance\BinanceWs.cs:line 60
+   at AWebSocketClient`1.OnMessageReceived(T message,
