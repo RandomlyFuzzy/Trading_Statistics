@@ -1,0 +1,30 @@
+System.Net.WebSockets.WebSocketException (0x80004005): An exception caused the WebSocket to enter the Aborted state. Please see the InnerException, if present, for more details.
+   at System.Net.WebSockets.ManagedWebSocket.CloseWithReceiveErrorAndThrowAsync(WebSocketCloseStatus closeStatus, WebSocketError error, String errorMessage, Exception innerException)
+   at System.Net.WebSockets.ManagedWebSocket.ReceiveAsyncPrivate[TResult](Memory`1 payloadBuffer, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask`1.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 135
+   at AWebSocketClient`1.<ConnectAsync>b__16_1() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 101
+System.Net.WebSockets.WebSocketException (0x80004005): An exception caused the WebSocket to enter the Aborted state. Please see the InnerException, if present, for more details.
+   at System.Net.WebSockets.ManagedWebSocket.CloseWithReceiveErrorAndThrowAsync(WebSocketCloseStatus closeStatus, WebSocketError error, String errorMessage, Exception innerException)
+   at System.Net.WebSockets.ManagedWebSocket.HandleReceivedCloseAsync(MessageHeader header, CancellationToken cancellationToken)
+   at System.Net.WebSockets.ManagedWebSocket.ReceiveAsyncPrivate[TResult](Memory`1 payloadBuffer, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask`1.GetTaskForValueTaskSource(IValueTaskSource`1 t)
+--- End of stack trace from previous location ---
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 135
+   at AWebSocketClient`1.<ConnectAsync>b__16_1() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 101
+System.Net.WebSockets.WebSocketException (0x80004005): An exception caused the WebSocket to enter the Aborted state. Please see the InnerException, if present, for more details.
+   at System.Net.WebSockets.ManagedWebSocket.CloseWithReceiveErrorAndThrowAsync(WebSocketCloseStatus closeStatus, WebSocketError error, String errorMessage, Exception innerException)
+   at System.Net.WebSockets.ManagedWebSocket.HandleReceivedCloseAsync(MessageHeader header, CancellationToken cancellationToken)
+   at System.Net.WebSockets.ManagedWebSocket.ReceiveAsyncPrivate[TResult](Memory`1 payloadBuffer, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask`1.GetTaskForValueTaskSource(IValueTaskSource`1 t)
+--- End of stack trace from previous location ---
+   at AWebSocketClient`1.ReceiveLoopAsync() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 135
+   at AWebSocketClient`1.<ConnectAsync>b__16_1() in C:\Users\liam-\source\repos\CyptoSeller\CoreLib\WebSockets\AWebSocketClient.cs:line 101
+System.Net.WebSockets.WebSocketException (0x80004005): An exception caused the WebSocket to enter the Aborted state. Please see the InnerException, if present, for more details.
+   at System.Net.WebSockets.ManagedWebSocket.CloseWithReceiveErrorAndThrowAsync(WebSocketCloseStatus closeStatus, WebSocketError error, String errorMessage, Exception innerException)
+   at System.Net.WebSockets.ManagedWebSocket.HandleReceivedCloseAsync(MessageHeader header, CancellationToken cancellationToken)
+   at System.Net.WebSockets.ManagedWebSocket.ReceiveAsyncPrivat

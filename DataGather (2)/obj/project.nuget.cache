@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "anBmujUbpPtkSZ5/S9MKedNq5mB6qNFEnIlZIBhrA4OR1p4Ii8affUtwJVJf5WFvbJ8hodtxOgS0Umb9LVuRZA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\liam-\\source\\repos\\CyptoSeller\\DataGather\\DataGather.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\liam-\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512",
+    "C:\\Users\\liam-\\.nuget\\packages\\pipelines.sockets.unofficial\\2.2.2\\pipelines.sockets.unofficial.2.2.2.nupkg.sha512",
+    "C:\\Users\\liam-\\.nuget\\packages\\stackexchange.redis\\2.6.96\\stackexchange.redis.2.6.96.nupkg.sha512",
+    "C:\\Users\\liam-\\.nuget\\packages\\system.io.pipelines\\5.0.1\\system.io.pipelines.5.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

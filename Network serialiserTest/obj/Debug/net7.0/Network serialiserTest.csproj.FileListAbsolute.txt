@@ -1,0 +1,22 @@
+C:\Users\liam-\source\repos\CyptoSeller\Network serialiserTest\bin\Debug\net7.0\Network serialiserTest.exe
+C:\Users\liam-\source\repos\CyptoSeller\Network serialiserTest\bin\Debug\net7.0\Network serialiserTest.deps.json
+C:\Users\liam-\source\repos\CyptoSeller\Network serialiserTest\bin\Debug\net7.0\Network serialiserTest.runtimeconfig.json
+C:\Users\liam-\source\repos\CyptoSeller\Network serialiserTest\bin\Debug\net7.0\Network serialiserTest.dll
+C:\Users\liam-\source\repos\CyptoSeller\Network serialiserTest\bin\Debug\net7.0\Network serialiserTest.pdb
+C:\Users\liam-\source\repos\CyptoSeller\Network serialiserTest\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\liam-\source\repos\CyptoSeller\Network serialiserTest\bin\Debug\net7.0\Pipelines.Sockets.Unofficial.dll
+C:\Users\liam-\source\repos\CyptoSeller\Network serialiserTest\bin\Debug\net7.0\StackExchange.Redis.dll
+C:\Users\liam-\source\repos\CyptoSeller\Network serialiserTest\bin\Debug\net7.0\System.IO.Pipelines.dll
+C:\Users\liam-\source\repos\CyptoSeller\Network serialiserTest\bin\Debug\net7.0\CoreLib.dll
+C:\Users\liam-\source\repos\CyptoSeller\Network serialiserTest\bin\Debug\net7.0\CoreLib.pdb
+C:\Users\liam-\source\repos\CyptoSeller\Network serialiserTest\obj\Debug\net7.0\Network serialiserTest.csproj.AssemblyReference.cache
+C:\Users\liam-\source\repos\CyptoSeller\Network serialiserTest\obj\Debug\net7.0\Network serialiserTest.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\liam-\source\repos\CyptoSeller\Network serialiserTest\obj\Debug\net7.0\Network serialiserTest.AssemblyInfoInputs.cache
+C:\Users\liam-\source\repos\CyptoSeller\Network serialiserTest\obj\Debug\net7.0\Network serialiserTest.AssemblyInfo.cs
+C:\Users\liam-\source\repos\CyptoSeller\Network serialiserTest\obj\Debug\net7.0\Network serialiserTest.csproj.CoreCompileInputs.cache
+C:\Users\liam-\source\repos\CyptoSeller\Network serialiserTest\obj\Debug\net7.0\Network serialiserTest.csproj.CopyComplete
+C:\Users\liam-\source\repos\CyptoSeller\Network serialiserTest\obj\Debug\net7.0\Network serialiserTest.dll
+C:\Users\liam-\source\repos\CyptoSeller\Network serialiserTest\obj\Debug\net7.0\refint\Network serialiserTest.dll
+C:\Users\liam-\source\repos\CyptoSeller\Network serialiserTest\obj\Debug\net7.0\Network serialiserTest.pdb
+C:\Users\liam-\source\repos\CyptoSeller\Network serialiserTest\obj\Debug\net7.0\Network serialiserTest.genruntimeconfig.cache
+C:\Users\liam-\source\repos\CyptoSeller\Network serialiserTest\obj\Debug\net7.0\ref\Network serialiserTest.dll
