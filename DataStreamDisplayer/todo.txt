@@ -1,0 +1,30 @@
+Kraken
+	-	https://docs.kraken.com/websockets/#message-book
+	-	https://docs.kraken.com/rest/#section/General-Usage
+
+
+---------------------------------------------------------------------------------------------------------------
+Cryto.com
+	-	https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#rest-api-root-endpoint
+	-	https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#websocket-root-endpoints
+Gemini
+	-	https://docs.gemini.com/rest-api/#introduction
+	-	https://docs.gemini.com/websocket-api/
+Bitmart
+	-	https://developer-pro.bitmart.com/en/spot/#restful-public-market-data
+	-	https://developer-pro.bitmart.com/en/spot/#websocket-subscription
+CoinBase
+	-	https://docs.cloud.coinbase.com/exchange/docs/welcomex
+	-	https://docs.cloud.coinbase.com/exchange/docs/websocket-channels
+
+
+
+
+
+
+
+MAYBE
+
+Bisq
+	-	https://developer-pro.bitmart.com/en/spot/#websocket-subscription
+	-
