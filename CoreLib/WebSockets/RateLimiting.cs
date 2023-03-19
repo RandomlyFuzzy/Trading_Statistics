@@ -42,7 +42,26 @@ public static class RateLimiting
         messagesSent.Add(new List<DateTime>());
         objs.Add(new Mutex());
     }
+    public static TimeSpan trySendAmt(string symol, bool force = false)
+    {
+        int index = exchanges.IndexOf(symol);
+        if (index == -1)
+        {
+            throw new Exception("invalid symbol " + symol);
+        }
 
+        //cleanup.
+        CleanUp();
+        messagesSent[index].Add(DateTime.Now);
+        CleanUp();
+        messagesSent[index].Add(DateTime.Now);
+        if (messagesSent[index].Count < amtTimeframe[index].Item1 * perLimit || force)
+        {
+            return Grace;
+        }
+
+        return ((DateTime.Now - messagesSent[index][0])- amtTimeframe[index].Item2);
+    }
     public static object trySend(string symol,bool force = false) { 
         int index = exchanges.IndexOf(symol);
         if (index == -1) {

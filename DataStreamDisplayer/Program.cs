@@ -4,10 +4,9 @@ using StackExchange.Redis;
 using System.Runtime.InteropServices;
 
 
-ConnectionMultiplexer _redis = ConnectionMultiplexer.Connect("192.168.0.20:6379,abortConnect=false,connectTimeout=30000,responseTimeout=30000");
+ConnectionMultiplexer _redis = ConnectionMultiplexer.Connect(SingletonUtility.REDIS_CONNECTION_STRING);
 Dictionary<string,Tuple<List<string>,Dictionary<string,List<string>>>> dict = new Dictionary<string,Tuple<List<string>,Dictionary<string,List<string>>>>();
 string[] exchanges = new string[6]{"nicehash","okx","binance","bitstamp", "kraken", "crypto" };
-
 var symbolResponse = new Uri("https://api.binance.com/api/v3/exchangeInfo").Get<BinanceSymbol>().GetAwaiter().GetResult();
 var temp = symbolResponse.symbols.Where((a) => a.status != "BREAK").ToList();
 for (int i = 0; i < temp.Count(); i++)
@@ -177,18 +176,19 @@ foreach (var item in amt.Where(a=>a.Item1.Substring(a.Item1.Length-3) != "USD"))
     // }
     // System.Console.WriteLine();
 
-    if(item.Item2>5){
+    if(item.Item2>5 || item.Item1 == "SHIBUSDT")
+    {
         subto.Add(item.Item1);
 
         foreach (var item2 in dict[item.Item1].Item2)
         {
-            var trac =  _redis.GetDatabase().CreateTransaction();
+            //var trac =  _redis.GetDatabase().CreateTransaction();
             // System.Console.WriteLine(item2.Key);
             foreach (var item3 in item2.Value)
             {
                 _redis.GetDatabase().ListLeftPush(item2.Key+"ex",item3);
             }
-           trac.Execute();
+            //trac.Execute();
         }
     }
 }

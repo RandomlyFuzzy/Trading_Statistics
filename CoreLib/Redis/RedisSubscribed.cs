@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 public static class RedisSubscribed
 {
-    static ConnectionMultiplexer _redis = ConnectionMultiplexer.Connect("192.168.0.20:6379,abortConnect=false,connectTimeout=30000,responseTimeout=30000");
+    static ConnectionMultiplexer _redis = ConnectionMultiplexer.Connect(SingletonUtility.REDIS_CONNECTION_STRING);
     static ConnectionMultiplexer redis
     {
         get
         {
-            if (_redis is null) _redis = ConnectionMultiplexer.Connect("192.168.0.20:6379,abortConnect=false,connectTimeout=30000,responseTimeout=30000");
+            if (_redis is null) _redis = ConnectionMultiplexer.Connect(SingletonUtility.REDIS_CONNECTION_STRING);
 
             return _redis;
         }

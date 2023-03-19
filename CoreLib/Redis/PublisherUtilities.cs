@@ -15,6 +15,9 @@ public class SingletonUtility {
     public volatile int _queue = 0;
     public volatile List<Thread> threads = new List<Thread>();
 
+    public static readonly string REDIS_CONNECTION_STRING = "192.168.0.20:6379,192.168.0.21:6379,192.168.0.22:6379,abortConnect=false,connectTimeout=30000,responseTimeout=30000";
+
+
 }
 public static class PublisherUtilities
 {
@@ -26,7 +29,7 @@ public static class PublisherUtilities
 
             if (_redis is null)
             {
-                _redis = ConnectionMultiplexer.Connect("192.168.0.20:6379,abortConnect=false,connectTimeout=30000,responseTimeout=30000");
+                _redis = ConnectionMultiplexer.Connect(SingletonUtility.REDIS_CONNECTION_STRING);
                 SingletonUtility.Instance.threads = new List<Thread>();
                 
                 SingletonUtility.Instance.threads.Add(new Thread(() => UploadLoop(thrdcnt2)));
@@ -63,7 +66,7 @@ public static class PublisherUtilities
     }
     public static void UploadLoop(int index) {
         index--;
-        var rds = ConnectionMultiplexer.Connect("192.168.0.20:6379,abortConnect=false,connectTimeout=30000,responseTimeout=30000");
+        var rds = ConnectionMultiplexer.Connect(SingletonUtility.REDIS_CONNECTION_STRING);
         var db = rds.GetDatabase();
         int buffer = 250;
         Tuple<byte[], string[]>[] temp = new Tuple<byte[], string[]>[250];
@@ -107,7 +110,7 @@ public static class PublisherUtilities
                 pubDir.PushRange(temp);
                 return;
             }
-            if ((thrdcnt < (queue/10000) +2)|| thrdcnt<2)
+            if ((thrdcnt < (queue/4000) +2)|| thrdcnt<2)
             {
                 lock (thrdlock)
                 {
