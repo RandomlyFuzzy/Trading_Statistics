@@ -26,23 +26,24 @@ public static class Window{
 
         keys.Add(new Tuple<string, int>(Symbol,clients[Symbol].Count-1));
         data.Add(new List<string>(){Symbol,exchange});
-        InsertTable(keys.Count-1);
+        InsertTable(keys.Count-1).GetAwaiter();
         return keys.Count-1;
     }
 
-    public static void SendData(int handle, int index,string value){
+    public static async Task SendData(int handle, int index,string value){
         if(data[handle].Count<index){
             for (int i = data[handle].Count-1; i < index; i++){
                 data[handle].Add("");
             }
         }
         data[handle][index] = value;
-        UpdateTable(handle, index);
+        await UpdateTable(handle, index);
         //InsertTable(handle);
     }
 
     private async static Task UpdateTable(int handle,int index)
     {
+       
         var kKeys = clients.Keys.ToList();
         kKeys.Sort();
         string ind = keys[handle].Item1;
@@ -59,7 +60,7 @@ public static class Window{
 
             Console.SetCursorPosition(0, startindex);
             var temp = keys[handle];
-            DrawRow(temp.Item1, temp.Item2, handle);
+            DrawRow(temp.Item1, temp.Item2, handle).GetAwaiter().GetResult();
         }
     }
 
@@ -87,7 +88,7 @@ public static class Window{
                 foreach (var item2 in clients[item])
                 {
                     int tempi = keys.IndexOf(new Tuple<string, int>(item, index));
-                    DrawRow(item, index, tempi);
+                    DrawRow(item, index, tempi).GetAwaiter().GetResult();
                     index++;
                     if (index > Console.BufferHeight) {
                         Console.BufferHeight = index + 10 ;
@@ -97,7 +98,7 @@ public static class Window{
         }
 
     }
-    private static void DrawRow(string key,int index,int handle){
+    private static async Task DrawRow(string key,int index,int handle){
         //for (int i = 0; i < Console.BufferWidth-1; i++)
         //{
         //    System.Console.Write("#");
@@ -112,16 +113,16 @@ public static class Window{
                 {
                     if (j > data[handle][i].Count() - 1)
                     {
-                        System.Console.Write(" ");
+                        await System.Console.Out.WriteAsync(" ");
                         continue;
                     }
                 }
                 catch {
                 }
-                System.Console.Write(data[handle][i][j]);
+                await System.Console.Out.WriteAsync(data[handle][i][j]);
             }
         }
-        System.Console.WriteLine();
+        await System.Console.Out.WriteLineAsync("");
         //for (int i = 0; i < Console.BufferWidth - 1; i++)
         //{
         //    System.Console.Write("#");

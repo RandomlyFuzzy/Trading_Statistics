@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using StackExchange.Redis;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -138,6 +139,18 @@ public static class PublisherUtilities
         //    SingletonUtility.Instance.threads[index] = null;
         //}
     }
+    public static bool set(string key,string value)
+    {
+        return set(key,Encoding.ASCII.GetBytes(value));
+    }
+    public static bool set(string key, byte[] value)
+    {
+        return __db.StringSet(key,value);
+    }
+    public static RedisValue get(string key)
+    {
+        return get(Encoding.ASCII.GetBytes(key));
+    }
     public static RedisValue get(byte[] key)
     {
         return __db.StringGet(key);
@@ -152,6 +165,13 @@ public static class PublisherUtilities
         return __db.ListRange("keys");
     }
 
+    public static void PublishData(string key, string value) {
+        var tran = __db.CreateTransaction();
+        __db.Publish(key, value, CommandFlags.FireAndForget);
+        queue--;
+        __db.Ping(CommandFlags.FireAndForget);
+        tran.Execute();
+    }
 
 
     public static void ince(byte[] key)

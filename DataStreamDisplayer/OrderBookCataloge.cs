@@ -2,12 +2,8 @@ public class OrderBookCataloge:IDisposable{
 
     string symbol = "";
     Dictionary<string,OrderBook> orderbooks = new Dictionary<string,OrderBook>();
-
     object ob = new object();
-
     StreamWriter sw;
-
-
     bool needHeader = false;
 
     public OrderBookCataloge(string Symbol,List<string> exchanges){
@@ -30,12 +26,12 @@ public class OrderBookCataloge:IDisposable{
     }
     public bool SubEntry(TradeObj obj)
     {
-        string key = obj.source+obj.symbol+obj.SpecialIDentifier;
+        string key = obj.source+obj.symbol;
         return orderbooks[key].Subtract(obj);
 
     }
     public bool AddEntry(OrderBookObj obj){
-        string key = obj.source + obj.symbol + obj.SpecialIDentifier;
+        string key = obj.source + obj.symbol;
 
         if (obj.objType == ObjectType.OrderbookUpdate){
             return orderbooks[key].Update(obj);
@@ -70,11 +66,14 @@ public class OrderBookCataloge:IDisposable{
 
             foreach (var item in orderbooks) {
                 toWrite += (item.Value.PrintMargins() + ",");
+                item.Value.UpdateOrderBook(item.Key);
             }
             if (toWrite.IndexOf(",0,") != -1)
             {
                 return;
             }
+            PublisherUtilities.PublishData(symbol, "UPD");
+
             sw.Write(toWrite);
             sw.WriteLine();
         }

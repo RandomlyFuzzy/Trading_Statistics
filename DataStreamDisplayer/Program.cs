@@ -61,7 +61,7 @@ for (int i = 0; i < temp3.Count(); i++)
     if(!dict.ContainsKey(Symbol)){
         dict[Symbol] = new Tuple<List<string>, Dictionary<string, List<string>>>(new List<string>(),new Dictionary<string, List<string>>());
     }
-    dict[Symbol].Item1.Add(exchange+Symbol+temp3[i].instId);
+    dict[Symbol].Item1.Add(exchange+Symbol);
 
     if(!dict[Symbol].Item2.ContainsKey(exchange)){
         dict[Symbol].Item2[exchange] = new List<string>();
@@ -155,17 +155,24 @@ amt.Sort((a,b)=>{
 
 
 
-foreach (var item in exchanges)
-{
-    _redis.GetDatabase().KeyDelete(item+"ex");
-}
+
 
 
 
 
 List<string> subto = new List<string>();
-amt = amt.Where(a => a.Item1.Length > 3).ToList();
-foreach (var item in amt.Where(a=>a.Item1.Substring(a.Item1.Length-3) != "USD"))
+amt = amt.Where(a => a.Item1.Length > 3).Where(a => a.Item1.Substring(a.Item1.Length - 3) != "USD").ToList();
+
+foreach (var item in exchanges)
+{
+    _redis.GetDatabase().KeyDelete(item + "ex");
+}
+
+foreach (var item in amt)
+{   
+    _redis.GetDatabase().KeyDelete(item.Item1);
+}
+foreach (var item in amt)
 {
     if(item.Item2<2) break;
 
@@ -182,16 +189,18 @@ foreach (var item in amt.Where(a=>a.Item1.Substring(a.Item1.Length-3) != "USD"))
 
         foreach (var item2 in dict[item.Item1].Item2)
         {
-            //var trac =  _redis.GetDatabase().CreateTransaction();
+            var trac =  _redis.GetDatabase().CreateTransaction();
             // System.Console.WriteLine(item2.Key);
             foreach (var item3 in item2.Value)
             {
                 _redis.GetDatabase().ListLeftPush(item2.Key+"ex",item3);
+                _redis.GetDatabase().ListLeftPush(item.Item1, item2.Key);
             }
-            //trac.Execute();
+            trac.Execute();
         }
     }
 }
+
 
 foreach (var item in exchanges)
 {
@@ -224,10 +233,17 @@ Dictionary<string,OrderBookCataloge> cats = new Dictionary<string, OrderBookCata
 // }
 // Directory.CreateDirectory("data");
 
+
+_redis.GetDatabase().KeyDelete("exchanges");
+
+
+
 bool Update = true;
 int updateAmounts = 0;
 foreach (var item in subto)
 {
+    _redis.GetDatabase().ListLeftPush("exchanges", item);
+
     cats[item] = new OrderBookCataloge(item,dict[item].Item1);
     cats[item].PrintHeaders();
     RedisSubscribed.SubscribeTo(item,(obj1,b2)=>{

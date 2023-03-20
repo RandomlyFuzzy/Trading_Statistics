@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class okxClient:AClient
+public class OKXClient:AClient
 {
     okxWs[] MarketConnections;
-    public okxClient() {
+    public OKXClient() {
 
         RateLimiting.Register("okx", 300, new TimeSpan(0, 5, 0));
         markets = PublisherUtilities.getList("okxex");

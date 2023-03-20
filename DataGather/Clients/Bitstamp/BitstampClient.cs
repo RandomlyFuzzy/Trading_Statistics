@@ -25,7 +25,7 @@ public class BitStampClient : AClient
         }
         foreach (var symbol in markets)
         {
-            // Console.WriteLine($"Symbol: {symbol}");
+            //Console.WriteLine($"Symbol: {symbol}");
         }
     }
 

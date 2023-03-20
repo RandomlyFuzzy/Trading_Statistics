@@ -34,4 +34,8 @@ public static class RedisSubscribed
         });
     }
 
+    public static void UnsubscribeTo(string key)
+    {
+        sub.Unsubscribe(key);
+    }
 }
