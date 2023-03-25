@@ -16,18 +16,19 @@ class BinanceWs : AWebSocketClient<BinanceBasicObject>
     }
 
     public async override Task init()
-    {
+    {   
+        Random rdm = new Random();
         await ConnectAsync(new Uri("wss://stream.binance.com:9443/ws"), cancellationToken);
         SendAsync($@"
         {{
             ""method"": ""SUBSCRIBE"",
             ""params"":
             [
-                ""{symbol.ToLower()}@depth@100ms"",
-                ""{symbol.ToLower()}@depth@100ms""
+                ""{symbol.ToLower()}@bookTicker"",
+                ""{symbol.ToLower()}@trade""
             ],
-            ""id"": 123455623
-        }}");
+            ""id"": {rdm.Next()}
+    }}");
 
     }
 

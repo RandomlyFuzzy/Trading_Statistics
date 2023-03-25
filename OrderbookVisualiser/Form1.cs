@@ -75,5 +75,15 @@ namespace OrderbookVisualiser
         {
             Console.WriteLine("rawr");
         }
+
+        private void splitContainer3_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

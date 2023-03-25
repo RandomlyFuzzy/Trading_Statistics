@@ -93,7 +93,6 @@ namespace OrderbookVisualiser
             // splitContainer2.Panel2
             // 
             splitContainer2.Panel2.Controls.Add(splitContainer4);
-            splitContainer2.Dock = DockStyle.Fill;
             splitContainer2.Size = new Size(530, 450);
             splitContainer2.SplitterDistance = 354;
             splitContainer2.TabIndex = 0;
@@ -104,6 +103,10 @@ namespace OrderbookVisualiser
             splitContainer3.Location = new Point(0, 0);
             splitContainer3.Name = "splitContainer3";
             splitContainer3.Orientation = Orientation.Horizontal;
+            // 
+            // splitContainer3.Panel1
+            // 
+            splitContainer3.Panel1.Paint += splitContainer3_Panel1_Paint;
             splitContainer3.Size = new Size(354, 450);
             splitContainer3.SplitterDistance = 218;
             splitContainer3.TabIndex = 0;
@@ -117,7 +120,6 @@ namespace OrderbookVisualiser
             // 
             // splitContainer4.Panel1
             // 
-            splitContainer4.Dock = DockStyle.Fill;
             splitContainer4.Panel1.Controls.Add(dataGridView1);
             splitContainer4.Size = new Size(172, 450);
             splitContainer4.SplitterDistance = 217;
@@ -125,14 +127,15 @@ namespace OrderbookVisualiser
             // 
             // dataGridView1
             // 
-            dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.Location = new Point(0, 0);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(172, 214);
+            dataGridView1.Size = new Size(172, 217);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellClick += dataGridView1_CellContentClick;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick_1;
             // 
             // Form1
             // 

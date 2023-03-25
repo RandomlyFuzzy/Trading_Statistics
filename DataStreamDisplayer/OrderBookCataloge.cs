@@ -64,16 +64,32 @@ public class OrderBookCataloge:IDisposable{
             var v = DateTime.Now;
             string toWrite = v.ToLongDateString()+" "+v.ToLongTimeString()+ ",";
 
+            double max = 0;
+            double min = 999999999;
+            string Maxsrc = "";
+            string Minsrc = "";
             foreach (var item in orderbooks) {
                 toWrite += (item.Value.PrintMargins() + ",");
-                item.Value.UpdateOrderBook(item.Key);
+                var bounds = item.Value.UpdateOrderBook(item.Key);
+                if (bounds.Item1 > max) {
+                    max = bounds.Item1;
+                    Maxsrc = item.Key;
+                }
+                if (bounds.Item2 != 0 &&bounds.Item2 < min)
+                {
+                    min = bounds.Item2;
+                    Minsrc = item.Key;
+                }
             }
+
+
+            PublisherUtilities.set(symbol+"bounds", "{Max:" + max + ", min:" + min + ", minsrc:\"" + Minsrc + "\"" + ", maxsrc:\"" +Maxsrc+ "\"}");
+
+            PublisherUtilities.PublishData(symbol+"UPD", new BasicObj().Serialize());
             if (toWrite.IndexOf(",0,") != -1)
             {
                 return;
             }
-            PublisherUtilities.PublishData(symbol, "UPD");
-
             sw.Write(toWrite);
             sw.WriteLine();
         }

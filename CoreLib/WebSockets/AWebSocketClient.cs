@@ -13,6 +13,8 @@ using System.Timers;
 using Newtonsoft.Json.Serialization;
 using System.Reflection;
 using System.Linq;
+using System.Net;
+using System.Xml;
 
 public abstract class AWebSocketClient<T> : IDisposable where T: class, IBasic,new()
 {
@@ -306,6 +308,30 @@ public static class HelperFunctions{
         if (!response.IsSuccessStatusCode) {
             Console.WriteLine($"Failed to make GET request. Status code: {response.StatusCode}");
         }
+    }
+    public static XmlDocument GetString(this Uri location) 
+    {
+        WebRequest request = WebRequest.Create(location);
+        request.Credentials = CredentialCache.DefaultCredentials; 
+        using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+        {
+            if ((int)response.StatusCode >= 200 && (int)response.StatusCode < 300)
+            {
+                using (Stream dataStream = response.GetResponseStream()) {
+                    using (StreamReader reader = new StreamReader(response.GetResponseStream())) {
+                        XmlDocument xmlDocument = new XmlDocument();
+                        string vale = reader.ReadToEnd();
+                        xmlDocument.LoadXml(vale.Replace("defer ", ""));
+                        return xmlDocument;
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Failed to make GET request. Status code: {response.StatusCode}");
+            }
+        }
+        return null;
     }
 
     public async static Task<T> Get<T>(this Uri location) where T: new(){

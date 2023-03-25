@@ -17,7 +17,7 @@ public static class MemSerlizerUtils
         return formatter.Deserialize(new MemoryStream(mem)) as T;
 #pragma warning restore SYSLIB0011 // Type or member is obsolete
     }
-
+ 
     public static byte[] Serialize<T>(this T data) where T : BasicObj
     {
         MemoryStream mem = new MemoryStream();

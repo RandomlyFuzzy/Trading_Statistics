@@ -5,7 +5,7 @@ public class CryptoClient : AClient
 
     public CryptoClient(){
 
-        RateLimiting.Register("crypto", 300, new TimeSpan(0, 5, 0));
+        RateLimiting.Register("crypto", 10, new TimeSpan(0, 0, 1));
         markets = PublisherUtilities.getList("cryptoex");
         MarketConnections = new CryptoWs[markets.Count()];
 

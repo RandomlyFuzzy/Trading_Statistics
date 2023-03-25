@@ -169,21 +169,15 @@ foreach (var item in exchanges)
 }
 
 foreach (var item in amt)
-{   
+{
     _redis.GetDatabase().KeyDelete(item.Item1);
 }
 foreach (var item in amt)
 {
-    if(item.Item2<2) break;
+    if(item.Item2<2) continue;
 
-    // System.Console.Write(item.Item1+" "+item.Item2+" ");
-    // foreach (var item2 in dict[item.Item1].Item1)
-    // {
-    //     System.Console.Write(item2+" ");
-    // }
-    // System.Console.WriteLine();
 
-    if(item.Item2>5 || item.Item1 == "SHIBUSDT")
+    if(item.Item2>=5 || item.Item1 == "SHIBUSDT")
     {
         subto.Add(item.Item1);
 
@@ -198,6 +192,7 @@ foreach (var item in amt)
             }
             trac.Execute();
         }
+        Console.WriteLine(item.Item1);
     }
 }
 

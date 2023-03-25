@@ -21,7 +21,7 @@ public class BinanceBasicObject : ABasic
 
     public BasicObj GetBasic(string symbol){
         return new TradeObj{
-            objType = e=="depthUpdate"?ObjectType.OrderbookUpdate:ObjectType.TradesUpdate,
+            objType = e=="depthUpdate"?ObjectType.OrderbookSubscription:ObjectType.TradesUpdate,
             source = "binance",
             symbol = symbol
         };
@@ -70,35 +70,36 @@ public class BinanaceTradeObject
 
 public class BinanceOrderBook : BinanceBasicObject, IOrderBook
 {
-    public long U { get; set; } = 0;
-    public long u {get;set;}= 0;
-    public List<string[]> b {get;set;}= new List<string[]>();
-    public List<string[]> a { get; set; } = new List<string[]>();
+    //public long U { get; set; } = 0;
+    public long u { get; set; } = 0;
+    //public List<string[]> b {get;set;}= new List<string[]>();
+    //public List<string[]> a { get; set; } = new List<string[]>();
+
+    public double b { get; set; } = 0;
+    public double B { get; set; } = 0;
+    public double a { get; set; } = 0;
+    public double A { get; set; } = 0;
 
     public BinanceOrderBook() { }
     public List<OrderBookObj> GetOrderBook(string Symbol)
     {
         List<OrderBookObj> ret = new List<OrderBookObj>();
         BasicObj obj = GetBasic(Symbol);
-        foreach (var item in a)
-        {
-            OrderBookObj obo = new OrderBookObj(obj);
-            obo.id = E;
-            obo.Dir = BuyDirection.SELL;
-            obo.price = double.Parse(item[0]);
-            obo.Quantity = double.Parse(item[1]);
-            ret.Add(obo);
-        }   
 
-        foreach (var item in b)
-        {
-            OrderBookObj obo = new OrderBookObj(obj);
-            obo.id = E;
-            obo.Dir = BuyDirection.BUY;
-            obo.price = double.Parse(item[0]);
-            obo.Quantity = double.Parse(item[1]);
-            ret.Add(obo);
-        }
+        OrderBookObj obo = new OrderBookObj(obj);
+        obo.id = u;
+        obo.Dir = BuyDirection.SELL;
+        obo.price = a;
+        obo.Quantity = A;
+        ret.Add(obo);
+
+        OrderBookObj obo2 = new OrderBookObj(obj);
+        obo2.id = u;
+        obo2.Dir = BuyDirection.BUY;
+        obo2.price = b;
+        obo2.Quantity = B;
+        ret.Add(obo);
+
         return ret;
     }
 }

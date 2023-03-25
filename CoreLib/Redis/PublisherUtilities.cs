@@ -147,6 +147,17 @@ public static class PublisherUtilities
     {
         return __db.StringSet(key,value);
     }
+    public static bool set(string key, string value, TimeSpan expire)
+    {
+        return set(key, Encoding.ASCII.GetBytes(value),expire);
+    }
+    public static bool set(string key, byte[] value,TimeSpan expire)
+    {
+        return __db.StringSet(key, value);
+    }
+
+
+
     public static RedisValue get(string key)
     {
         return get(Encoding.ASCII.GetBytes(key));
@@ -164,7 +175,14 @@ public static class PublisherUtilities
     public static RedisValue[] getKeys() {
         return __db.ListRange("keys");
     }
-
+    public static void PublishData(string key, byte[] value)
+    {
+        var tran = __db.CreateTransaction();
+        __db.Publish(key, value, CommandFlags.FireAndForget);
+        queue--;
+        __db.Ping(CommandFlags.FireAndForget);
+        tran.Execute();
+    }
     public static void PublishData(string key, string value) {
         var tran = __db.CreateTransaction();
         __db.Publish(key, value, CommandFlags.FireAndForget);
