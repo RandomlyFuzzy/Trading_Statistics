@@ -23,7 +23,7 @@ public class SingletonUtility {
 public static class PublisherUtilities
 {
     static ConnectionMultiplexer _redis = null;
-    static ConnectionMultiplexer redis
+    public static ConnectionMultiplexer redis
     {
         get
         {
@@ -31,8 +31,8 @@ public static class PublisherUtilities
             if (_redis is null)
             {
                 _redis = ConnectionMultiplexer.Connect(SingletonUtility.REDIS_CONNECTION_STRING);
-                SingletonUtility.Instance.threads = new List<Thread>();
-                
+
+                SingletonUtility.Instance.threads = new List<Thread>();                
                 SingletonUtility.Instance.threads.Add(new Thread(() => UploadLoop(thrdcnt2)));
                 SingletonUtility.Instance.threads.Last().IsBackground = false;
                 SingletonUtility.Instance.threads.Last().Start();
@@ -43,6 +43,7 @@ public static class PublisherUtilities
 
             return _redis;
         }
+        set { _redis = value; }
     }
     static readonly IDatabase __db = redis.GetDatabase();
 

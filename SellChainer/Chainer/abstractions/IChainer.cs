@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 public interface IChainer
 {
     public CoinPair Pair { get; set; }
+    public BuyDirection Dir { get; set; }
 
 
-
-
+    public void RunLoop(double amount);
+    public void SetPair(CoinPair pair,BuyDirection dir);
     public IChainer Chain<T>(IChainer chain) where T : IChainer;
     public IChainer Calculate(double amount);
     public bool hasChanged();

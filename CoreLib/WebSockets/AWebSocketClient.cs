@@ -348,4 +348,21 @@ public static class HelperFunctions{
         }
         return default(T);
     }
+    public static T GetJsonFromRedis<T>(this string key) {
+        return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(PublisherUtilities.get(key));
+    }
+    public static string GetFromRedis(this string key)
+    {
+        return ""+PublisherUtilities.get(key);
+    }
+}
+[Serializable]
+public class bnds
+{
+    public double min { get; set; } = 0;
+    public double max { get; set; } = 0;
+    public string minsrc { get; set; } = "";
+    public string maxsrc { get; set; } = "";
+
+    public bnds() { }
 }

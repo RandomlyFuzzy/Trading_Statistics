@@ -8,14 +8,11 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 public class BuyKeyPairChainer : BuyChainer
 {
     string pair = "";
-    double fee = -1;
-
-
-    public override CoinPair Pair { get => _Pair; set => _Pair = value; }
 
 
 
-    public BuyKeyPairChainer() { }
+
+            public BuyKeyPairChainer() { }
 
 
     public BuyKeyPairChainer(string PAIR, double fee) {
@@ -42,7 +39,7 @@ public class BuyKeyPairChainer : BuyChainer
 
         if(json == "") throw new NotImplementedException(pair+" bounds");
 
-        var bnds = Newtonsoft.Json.JsonConvert.DeserializeObject<Bounds>(json);
+        var bnds = Newtonsoft.Json.JsonConvert.DeserializeObject<bnds>(json);
 
         double price = bnds.min;
         Set(price, fee);

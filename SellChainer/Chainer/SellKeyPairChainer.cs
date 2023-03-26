@@ -8,8 +8,6 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 public class SellKeyPairChainer : SellChainer
 {
     string pair = "";
-    double fee = -1;
-    public override CoinPair Pair { get => _Pair; set => _Pair = value; }
 
     public SellKeyPairChainer() { }
 
@@ -48,14 +46,4 @@ public class SellKeyPairChainer : SellChainer
 
         change = true;
     }
-}
-[Serializable]
- public class bnds
-{
-    public double min { get; set; } = 0;
-    public double max { get; set; } = 0;
-    public string minsrc { get; set; } = "";
-    public string maxsrc { get; set; } = "";
-
-    public bnds() { }
 }

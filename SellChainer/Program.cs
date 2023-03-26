@@ -1,23 +1,35 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using StackExchange.Redis;
+
 Console.WriteLine("Hello, World!");
 
-
+PublisherUtilities.redis = ConnectionMultiplexer.Connect(SingletonUtility.REDIS_CONNECTION_STRING);
 
 ChainerFactory factory = new ChainerFactory();
 
 
-IChainer temp = ChainerFactory.GetFromPairs<BuyKeyPairChainer, SellKeyPairChainer>(Coin.BTC, 
+IChainer temp = ChainerFactory.GetFromPairs<BuyKeyPairChainer, SellKeyPairChainer>(Coin.ETH,true, 
     new CoinPair(Coin.ETH, Coin.BTC), 
-    new CoinPair(Coin.ETH, Coin.USDT), 
-    new CoinPair(Coin.SUSHI, Coin.USDT), 
-    new CoinPair(Coin.SUSHI, Coin.BTC), 
-    new CoinPair(Coin.BTC, Coin.USDT));
+    new CoinPair(Coin.BTC, Coin.USDT),
+    new CoinPair(Coin.ETH, Coin.USDT) 
+    );
+Console.WriteLine();
+IChainer temp2 = ChainerFactory.GetFromPairs<BuyKeyPairChainer, SellKeyPairChainer>(Coin.BTC, true,
+    new CoinPair(Coin.ETH, Coin.BTC),
+    new CoinPair(Coin.ETH, Coin.USDT),
+    new CoinPair(Coin.BTC, Coin.USDT)
+    );
+Console.WriteLine();
+
+//temp.Calculate(0.25);
+//Console.WriteLine();
+//temp2.Calculate(0.25);
+//return;
 
 
+temp.RunLoop(0.25);
+temp2.RunLoop(0.25);
 
-
-temp.Calculate(0.25);
-return;
 
 
 //BuyKeyPairChainer ethbtc = new BuyKeyPairChainer(new CoinPair(Coin.ETH, Coin.BTC).ToString(), 0.004);
@@ -29,7 +41,6 @@ return;
 
 
 //while (true) {
-//    var temp = ethbtc.Chain<BuyKeyPairChainer>(ethusdt).Chain<SellKeyPairChainer>(btcusdt);
 //    while (!temp.hasChanged()) Thread.Sleep(1);
 //    temp.Calculate(0.25);
 //}

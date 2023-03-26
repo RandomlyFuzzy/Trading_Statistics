@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -19,39 +20,49 @@ public abstract class Chainer : IChainer, ICloneable
     internal double amount = 0;
     internal double fee = 0;
     public CoinPair _Pair;
-    public virtual CoinPair Pair { get =>_Pair; set => _Pair = value; }
-    internal string SymbolPair
+    public virtual CoinPair Pair
     {
-        set {
-            this.Pair = KeyIndexer.GetSymbolPair(value);
-        } 
+        get => _Pair; set
+        {
+            _Pair = value;
+            SetPair(Pair, Dir);
+        }
     }
 
 
-    public Chainer() {
-    }
+    public BuyDirection _Dir;
+    public BuyDirection Dir { get => _Dir; set => _Dir = value; }
+
+
+    internal string SymbolPair { set { this.Pair = KeyIndexer.GetSymbolPair(value); } }
+
+    public Chainer() {}
     public Chainer(double price, double fee) => Set(price, fee);
 
    
 
     public IChainer LogValue(){
-        if(LogPrice)Console.WriteLine(GetSymbol() + " : " + GetAmount() + " at cost " + GetPrice() + " with a fee of " + GetFee() + " has GBP value of " + GetValue());
+        if(LogPrice)Console.WriteLine(GetSymbol() + " : " + CalcAmount() + " at cost " + GetPrice() + " with a fee of " + GetFee() + " has GBP value of " + GetValue());
 
         return this;
     }   
 
     public IChainer SetPrinting(bool printing)
     {
+        foreach (var item in ChainStack) { 
+            ((Chainer)item).LogPrice = printing;
+        }
         LogPrice = printing;
         return this;
     }
     public IChainer Chain<T>(IChainer chain) where T : IChainer
-    {   
-        if (ChainStack.Count == 0) {
+    {
+        Console.WriteLine(chain.GetType().ToString());
+        if(ChainStack.Count == 0) { 
             ChainStack.Enqueue(this);
         }
 
-        Next = chain.SetStack(ChainStack, this);
+        Next = chain.SetStack(ChainStack, chain);
         chain.SetPrinting(LogPrice);
         return chain;
     }
@@ -65,7 +76,20 @@ public abstract class Chainer : IChainer, ICloneable
     }
     public CoinPair GetSymbol() => Pair;
 
-    public virtual double GetValue() => -1;
+    public virtual double GetValue() {
+
+        switch (Dir)
+        {
+            case BuyDirection.BUY:
+                return ChainerFactory.GetCoinValue(Pair.BuyCoin).GetAwaiter().GetResult() * CalcAmount();
+            case BuyDirection.SELL:
+                return ChainerFactory.GetCoinValue(Pair.SellCoin).GetAwaiter().GetResult() * CalcAmount();
+            default:
+                break;
+        }
+
+        return -1;
+    }
 
     public IChainer Set(double price, double fee)
     {
@@ -77,8 +101,17 @@ public abstract class Chainer : IChainer, ICloneable
     IChainer IChainer.Set(double amount)
     {
         this.amount = amount;
+
         return this;
     }
+
+    private IChainer LogSimpleValue()
+    {
+        if (LogPrice) Console.WriteLine(GetSymbol() + " : " + GetAmount() + " at cost " + GetPrice() + " with a fee of " + GetFee() + " has GBP value of " + GetValue());
+
+        return this;
+    }
+
     public IChainer SetStack(Queue<IChainer> Chain, IChainer current)
     {
         this.ChainStack = Chain;
@@ -88,11 +121,12 @@ public abstract class Chainer : IChainer, ICloneable
 
     public IChainer Calculate(double FirstValue)
     {
-        var temp = new Queue<IChainer>(this.ChainStack);
+        var temp = new Queue<IChainer>(ChainStack);
 
         IChainer Current = temp.Dequeue();
         Current.Set(FirstValue);
         IChainer chain;
+        ((Chainer)Current).LogSimpleValue();
         while (temp.Count > 0)
         {
             chain = temp.Dequeue();
@@ -103,15 +137,15 @@ public abstract class Chainer : IChainer, ICloneable
 
             chain.Set(Current.CalcAmount());
             chain.SetPrinting(Current.GetPrinting());
-            chain.LogValue();
+            ((Chainer)chain).LogSimpleValue();
             Current = chain;
         }
-        chain = Current.Next();
+        //chain = Current.Next();
 
-        chain.Set(Current.CalcAmount());
-        chain.SetPrinting(Current.GetPrinting());
-        chain.LogValue();
-        Current = chain.Next();
+        //chain.Set(Current.CalcAmount());
+        //chain.SetPrinting(Current.GetPrinting());
+        Current.LogValue();
+        //Current = chain.Next();
 
         //Current = Set(Current.CalcAmount()).SetPrinting(Current.GetPrinting()).LogValue();
         change = false;
@@ -126,9 +160,6 @@ public abstract class Chainer : IChainer, ICloneable
 
     public abstract double CalcAmount();
 
-  
-
-   
 
     public bool GetPrinting()
     {
@@ -157,5 +188,37 @@ public abstract class Chainer : IChainer, ICloneable
     public object Clone()
     {
         return this.MemberwiseClone();
+    }
+
+    public void SetPair(CoinPair pair, BuyDirection d)
+    {
+        bnds b = (pair.ToString() + "bounds").GetJsonFromRedis<bnds>();
+
+        switch (d)
+        {
+            case BuyDirection.BUY:
+                price = b.min;
+                break;
+            case BuyDirection.SELL:
+                price = b.max;
+                break;
+        }
+
+
+
+
+    }
+
+    public void RunLoop(double amount)
+    {
+        new Thread(() =>
+        {
+            while (true)
+            {
+                while (!hasChanged()) Thread.Sleep(1);
+                Calculate(amount);
+            }
+        }).Start();
+
     }
 }
