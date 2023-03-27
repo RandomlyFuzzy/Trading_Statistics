@@ -7,11 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 public abstract class Chainer : IChainer, ICloneable
-{ 
+{
+    internal Guid _ChainId { get; set; } = Guid.NewGuid();
+    public Guid ChainId { get => _ChainId; set => _ChainId = value; }
+    internal string id { get {  return ChainId.ToString().Substring(0,6); } }
+
 
     internal Queue<IChainer> ChainStack = new Queue<IChainer>();
     internal IChainer Next = null;
-
     public bool change { internal set; get; } = true;
 
     internal bool LogPrice = false;
@@ -26,23 +29,28 @@ public abstract class Chainer : IChainer, ICloneable
         {
             _Pair = value;
             SetPair(Pair, Dir);
+            RedisSubscribed.SubscribeTo(Pair + "UPD", Update);
+         
         }
     }
 
+    private void Update(BasicObj arg1, byte[] arg2)
+    {
+        SetPair(Pair, Dir);
+        change = true;
+    }
 
     public BuyDirection _Dir;
     public BuyDirection Dir { get => _Dir; set => _Dir = value; }
-
-
     internal string SymbolPair { set { this.Pair = KeyIndexer.GetSymbolPair(value); } }
-
     public Chainer() {}
     public Chainer(double price, double fee) => Set(price, fee);
 
    
 
-    public IChainer LogValue(){
-        if(LogPrice)Console.WriteLine(GetSymbol() + " : " + CalcAmount() + " at cost " + GetPrice() + " with a fee of " + GetFee() + " has GBP value of " + GetValue());
+    public IChainer LogValue(bool force = false)
+    {
+        if(LogPrice||force)Console.WriteLine(id+" -> "+GetSymbol() + " : " + CalcAmount() + " at cost " + GetPrice() + " with a fee of " + GetFee() + " has GBP value of " + GetValue());
 
         return this;
     }   
@@ -64,6 +72,7 @@ public abstract class Chainer : IChainer, ICloneable
 
         Next = chain.SetStack(ChainStack, chain);
         chain.SetPrinting(LogPrice);
+        chain.ChainId = ChainId;
         return chain;
     }
 
@@ -105,9 +114,9 @@ public abstract class Chainer : IChainer, ICloneable
         return this;
     }
 
-    private IChainer LogSimpleValue()
+    private IChainer LogSimpleValue(bool force = false)
     {
-        if (LogPrice) Console.WriteLine(GetSymbol() + " : " + GetAmount() + " at cost " + GetPrice() + " with a fee of " + GetFee() + " has GBP value of " + GetValue());
+        if (LogPrice|| force) Console.WriteLine(id + " -> " + GetSymbol() + " : " + GetAmount() + " at cost " + GetPrice() + " with a fee of " + GetFee() + " has GBP value of " + GetValue());
 
         return this;
     }
@@ -193,17 +202,23 @@ public abstract class Chainer : IChainer, ICloneable
     public void SetPair(CoinPair pair, BuyDirection d)
     {
         bnds b = (pair.ToString() + "bounds").GetJsonFromRedis<bnds>();
-
+        
+        string setTitle = pair.ToString();
+        setTitle += " " + price;
         switch (d)
         {
             case BuyDirection.BUY:
                 price = b.min;
+
                 break;
             case BuyDirection.SELL:
                 price = b.max;
                 break;
         }
+        setTitle += " -> " + price;
+        setTitle += " " + Dir.ToString();
 
+        Console.Title = setTitle;
 
 
 
@@ -211,12 +226,14 @@ public abstract class Chainer : IChainer, ICloneable
 
     public void RunLoop(double amount)
     {
+        ((Chainer)ChainStack.First()).amount = amount;
         new Thread(() =>
         {
             while (true)
             {
                 while (!hasChanged()) Thread.Sleep(1);
-                Calculate(amount);
+                ((Chainer)ChainStack.First()).LogSimpleValue(true);
+                Calculate(amount).LogValue(true);
             }
         }).Start();
 

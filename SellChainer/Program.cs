@@ -8,13 +8,13 @@ PublisherUtilities.redis = ConnectionMultiplexer.Connect(SingletonUtility.REDIS_
 ChainerFactory factory = new ChainerFactory();
 
 
-IChainer temp = ChainerFactory.GetFromPairs<BuyKeyPairChainer, SellKeyPairChainer>(Coin.ETH,true, 
+IChainer temp = ChainerFactory.GetFromPairs<BuyKeyPairChainer, SellKeyPairChainer>(Coin.ETH,false, 
     new CoinPair(Coin.ETH, Coin.BTC), 
     new CoinPair(Coin.BTC, Coin.USDT),
     new CoinPair(Coin.ETH, Coin.USDT) 
     );
 Console.WriteLine();
-IChainer temp2 = ChainerFactory.GetFromPairs<BuyKeyPairChainer, SellKeyPairChainer>(Coin.BTC, true,
+IChainer temp2 = ChainerFactory.GetFromPairs<BuyKeyPairChainer, SellKeyPairChainer>(Coin.BTC, false,
     new CoinPair(Coin.ETH, Coin.BTC),
     new CoinPair(Coin.ETH, Coin.USDT),
     new CoinPair(Coin.BTC, Coin.USDT)

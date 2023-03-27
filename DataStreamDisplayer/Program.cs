@@ -3,6 +3,8 @@ using System.Text;
 using StackExchange.Redis;
 using System.Runtime.InteropServices;
 
+Console.SetError(new StreamWriter("error" + string.Join(",", Environment.GetCommandLineArgs().Skip(1)) + ".txt"));
+
 
 ConnectionMultiplexer _redis = ConnectionMultiplexer.Connect(SingletonUtility.REDIS_CONNECTION_STRING);
 Dictionary<string,Tuple<List<string>,Dictionary<string,List<string>>>> dict = new Dictionary<string,Tuple<List<string>,Dictionary<string,List<string>>>>();
@@ -177,7 +179,7 @@ foreach (var item in amt)
     if(item.Item2<2) continue;
 
 
-    if(item.Item2>=5 || item.Item1 == "SHIBUSDT")
+    if(item.Item2>=7 || item.Item1 == "ETHBTC" || item.Item1 == "ETHUSDT" || item.Item1 == "BTCUSDT")
     {
         subto.Add(item.Item1);
 
@@ -235,6 +237,7 @@ _redis.GetDatabase().KeyDelete("exchanges");
 
 bool Update = true;
 int updateAmounts = 0;
+int updateTotalsAmounts = 0;
 foreach (var item in subto)
 {
     _redis.GetDatabase().ListLeftPush("exchanges", item);
@@ -242,8 +245,9 @@ foreach (var item in subto)
     cats[item] = new OrderBookCataloge(item,dict[item].Item1);
     cats[item].PrintHeaders();
     RedisSubscribed.SubscribeTo(item,(obj1,b2)=>{
+        updateTotalsAmounts++;
         var obj2 = b2.Deserialize<TradeObj>();
-        if(!((int)obj1.objType>=2))
+        if(((int)obj1.objType<=2))
         {
             if (cats[item].SubEntry(obj2))
             {
@@ -251,8 +255,6 @@ foreach (var item in subto)
                 Update = true;
                 cats[item].PrintMargins();
             }
-
-
             return;
         }
         var obj = b2.Deserialize<OrderBookObj>();
@@ -272,7 +274,7 @@ if(!Update){
     continue;
 }
     Console.SetCursorPosition(0,0);
-    System.Console.WriteLine(updateAmounts);
+    System.Console.WriteLine(updateAmounts+" / "+updateTotalsAmounts);
     foreach(var cat in cats){
         cat.Value.PrintValues();
         Console.WriteLine();

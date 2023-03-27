@@ -24,8 +24,7 @@ class BinanceWs : AWebSocketClient<BinanceBasicObject>
             ""method"": ""SUBSCRIBE"",
             ""params"":
             [
-                ""{symbol.ToLower()}@bookTicker"",
-                ""{symbol.ToLower()}@trade""
+                ""{symbol.ToLower()}@bookTicker""
             ],
             ""id"": {rdm.Next()}
     }}");
@@ -39,6 +38,7 @@ class BinanceWs : AWebSocketClient<BinanceBasicObject>
         {
             return ObjectType.None;
         }
+        return ObjectType.OrderbookUpdate;
 
         totalEvents++;
         //System.Console.Write(Prefix+" "+message.m+" ");

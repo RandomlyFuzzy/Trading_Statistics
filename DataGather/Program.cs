@@ -1,7 +1,6 @@
 ﻿
 
-Console.SetError(new StreamWriter("error"+ string.Join(",",Environment.GetCommandLineArgs().Skip(1))+".txt"));
-
+Console.SetError(new StreamWriter("error" + string.Join(",", Environment.GetCommandLineArgs().Skip(1)) + ".txt"));
 
 
 

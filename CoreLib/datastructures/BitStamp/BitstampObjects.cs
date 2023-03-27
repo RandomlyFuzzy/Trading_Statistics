@@ -56,7 +56,7 @@ public class BitstampOrderbook:Bitstamp,IOrderBook{
         OrderBookObj obj2 = new OrderBookObj(obj);  
         obj2.Quantity = data.amount;
         obj2.price = data.price;
-        obj2.Dir = (BuyDirection)((data.order_type+1)%2);
+        obj2.Dir = (BuyDirection)((data.order_type));
         obj2.id = data.id;
         ret.Add(obj2);
         return ret;

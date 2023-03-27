@@ -18,7 +18,7 @@ class CryptoWs : AWebSocketClient<Crypto>
   ""id"": {random.Next()},
   ""method"": ""subscribe"",
   ""params"": {{
-    ""channels"": [""trade.{symbol}"",""book.{symbol}""]
+    ""channels"": [""trade.{symbol}"",""book.{symbol}.10""]
   }}
 }}");
 

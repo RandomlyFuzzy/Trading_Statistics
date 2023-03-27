@@ -9,6 +9,7 @@ public interface IChainer
     public CoinPair Pair { get; set; }
     public BuyDirection Dir { get; set; }
 
+    public Guid ChainId { get; internal set; }
 
     public void RunLoop(double amount);
     public void SetPair(CoinPair pair,BuyDirection dir);
@@ -21,7 +22,7 @@ public interface IChainer
 
     internal IChainer Next();
     public IChainer GetLast();
-    public IChainer LogValue();
+    public IChainer LogValue(bool force = false);
     public IChainer SetPrinting(bool printing);
     public bool GetPrinting();
     public double GetValue();

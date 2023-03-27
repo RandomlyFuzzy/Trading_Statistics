@@ -59,6 +59,7 @@ public class OrderBookCataloge:IDisposable{
             sw.WriteLine();
         }
     }
+    string send = "";
     public void PrintMargins(){
         lock (sw) {
             var v = DateTime.Now;
@@ -82,10 +83,15 @@ public class OrderBookCataloge:IDisposable{
                 }
             }
 
+            string sendTemp = "{Max:" + max + ", min:" + min + ", minsrc:\"" + Minsrc + "\"" + ", maxsrc:\"" + Maxsrc + "\"}";
+            if(send != sendTemp)
+            {
+                PublisherUtilities.set(symbol + "bounds", send) ;
+                send = sendTemp;
+                Thread.Sleep(1);
+                PublisherUtilities.PublishData(symbol+"UPD", new BasicObj().Serialize());
+            }
 
-            PublisherUtilities.set(symbol+"bounds", "{Max:" + max + ", min:" + min + ", minsrc:\"" + Minsrc + "\"" + ", maxsrc:\"" +Maxsrc+ "\"}");
-
-            PublisherUtilities.PublishData(symbol+"UPD", new BasicObj().Serialize());
             if (toWrite.IndexOf(",0,") != -1)
             {
                 return;

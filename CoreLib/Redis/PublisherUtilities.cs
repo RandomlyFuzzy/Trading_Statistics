@@ -94,11 +94,11 @@ public static class PublisherUtilities
                     if (item == null) break;
 
                     for (int j = 0; j < item.Item2.Length; j++) {
-                        db.Publish(item.Item2[j], Encoding.ASCII.GetString(item.Item1), CommandFlags.FireAndForget);
+                        db.Publish(item.Item2[j], Encoding.ASCII.GetString(item.Item1));
                     }
                     queue--;
                 }
-                db.Ping(CommandFlags.FireAndForget);
+                db.Ping();
                 tran.Execute();
             }catch(Exception ex)
             {
@@ -238,7 +238,7 @@ public static class PublisherUtilities
         lock (sync)
         {
             
-            if (!(data.objType is ObjectType.TradesSubscription || data.objType is ObjectType.OrderbookSubscription))
+            if (!(data.objType is ObjectType.None))
             {
                 data.Serialize().PublishData(channels);
             }

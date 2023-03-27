@@ -21,7 +21,7 @@ public class BinanceBasicObject : ABasic
 
     public BasicObj GetBasic(string symbol){
         return new TradeObj{
-            objType = e=="depthUpdate"?ObjectType.OrderbookSubscription:ObjectType.TradesUpdate,
+            objType = e=="trade"?ObjectType.TradesUpdate: ObjectType.OrderbookUpdate,
             source = "binance",
             symbol = symbol
         };
@@ -43,7 +43,7 @@ public class BinanceTrade : BinanceBasicObject, ITradeObject
         foreach (var item in trades)
         {
             TradeObj temp = new TradeObj(obj);
-            temp.Dir = item.isBuyerMaker ? BuyDirection.BUY : BuyDirection.SELL;
+            temp.Dir = item.isBuyerMaker ?  BuyDirection.SELL: BuyDirection.BUY;
             temp.Price = item.price;
             temp.Quantity = item.qty;
             temp.TimeStamp = item.time;
@@ -75,10 +75,10 @@ public class BinanceOrderBook : BinanceBasicObject, IOrderBook
     //public List<string[]> b {get;set;}= new List<string[]>();
     //public List<string[]> a { get; set; } = new List<string[]>();
 
-    public double b { get; set; } = 0;
-    public double B { get; set; } = 0;
-    public double a { get; set; } = 0;
-    public double A { get; set; } = 0;
+    public string b { get; set; } = "";
+    public string B { get; set; } = "";
+    public string a { get; set; } = "";
+    public string A { get; set; } = "";
 
     public BinanceOrderBook() { }
     public List<OrderBookObj> GetOrderBook(string Symbol)
@@ -89,16 +89,16 @@ public class BinanceOrderBook : BinanceBasicObject, IOrderBook
         OrderBookObj obo = new OrderBookObj(obj);
         obo.id = u;
         obo.Dir = BuyDirection.SELL;
-        obo.price = a;
-        obo.Quantity = A;
+        obo.price = double.Parse(a);
+        obo.Quantity = double.Parse(A);
         ret.Add(obo);
 
         OrderBookObj obo2 = new OrderBookObj(obj);
         obo2.id = u;
         obo2.Dir = BuyDirection.BUY;
-        obo2.price = b;
-        obo2.Quantity = B;
-        ret.Add(obo);
+        obo2.price = double.Parse(b);
+        obo2.Quantity = double.Parse(B);
+        ret.Add(obo2);
 
         return ret;
     }
