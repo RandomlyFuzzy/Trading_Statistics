@@ -197,7 +197,7 @@ public abstract class AWebSocketClient<T> : IDisposable where T: class, IBasic,n
     protected void OnMessageReceived(T message, ObjectDecoder obj) {
 
         messageQueue++;
-        List<string> channels = new List<string>();// Prefix.Split(' '));
+        List<string> channels = new List<string>(Prefix.Split(' '));
         if (!channels.Contains(symbol))
         {
             channels.Add(symbol);
@@ -218,9 +218,9 @@ public abstract class AWebSocketClient<T> : IDisposable where T: class, IBasic,n
 
                 foreach (var item in objto as List<TradeObj>)
                 {
-                    //channels.Add(item.objType.ToString());
+                    channels.Add(item.objType.ToString());
                     item.PublishData(channels.ToArray());
-                    //channels.Remove(item.objType.ToString());
+                    channels.Remove(item.objType.ToString());
                 }
 
                 break;
@@ -235,9 +235,9 @@ public abstract class AWebSocketClient<T> : IDisposable where T: class, IBasic,n
 
                 foreach (var item in oto3 as List<OrderBookObj>)
                 {
-                    //channels.Add(item.objType.ToString());
+                    channels.Add(item.objType.ToString());
                     item.PublishData(channels.ToArray());
-                    //channels.Remove(item.objType.ToString());
+                    channels.Remove(item.objType.ToString());
                 }
                 break;
             default:
