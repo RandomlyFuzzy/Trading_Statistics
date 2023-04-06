@@ -7,6 +7,10 @@ Console.SetError(new StreamWriter("error" + string.Join(",", Environment.GetComm
 
 
 ConnectionMultiplexer _redis = ConnectionMultiplexer.Connect(SingletonUtility.REDIS_CONNECTION_STRING);
+
+
+
+
 Dictionary<string,Tuple<List<string>,Dictionary<string,List<string>>>> dict = new Dictionary<string,Tuple<List<string>,Dictionary<string,List<string>>>>();
 string[] exchanges = new string[6]{"nicehash","okx","binance","bitstamp", "kraken", "crypto" };
 var symbolResponse = new Uri("https://api.binance.com/api/v3/exchangeInfo").Get<BinanceSymbol>().GetAwaiter().GetResult();

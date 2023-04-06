@@ -17,7 +17,7 @@ public class ChainerFactory
     }
 
 
-    public static  async Task<double> GetCoinValue(string coin) {
+    public static async Task<double> GetCoinValue(string coin) {
         var value = ""+PublisherUtilities.get(coin);
 
         if (value == "") { 
@@ -114,4 +114,10 @@ public class ChainerFactory
         return ret;
     }
 
+
+
+
+    public static bool CanChain(CoinPair coinPair, CoinPair coinPair1) {
+        return coinPair.BuyCoin == coinPair1.BuyCoin || coinPair.BuyCoin == coinPair1.SellCoin || coinPair.SellCoin == coinPair1.BuyCoin || coinPair.SellCoin == coinPair1.SellCoin;
+    }
 }

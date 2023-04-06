@@ -13938,12 +13938,36 @@ public static class KeyIndexer
 },{ "OMGBTC", new CoinPair(Coin.OMG,Coin.BTC)}
     };
 
-
-
-
     public static CoinPair GetSymbolPair(string PAIR) {
         if (CoinPairCache.ContainsKey(PAIR)) { 
             return CoinPairCache[PAIR];
+        }
+
+        object ou1,ou2;
+
+        switch (PAIR.Length)
+        {
+            case 6:
+                if (Enum.TryParse(typeof(Coin), PAIR.Substring(0, 3), out ou1) && Enum.TryParse(typeof(Coin), PAIR.Substring(3), out ou2)) { 
+                    return new CoinPair((Coin)ou1, (Coin)ou2);
+                }
+                break;
+            case 7:
+                if (Enum.TryParse(typeof(Coin), PAIR.Substring(0, 3), out ou1) && Enum.TryParse(typeof(Coin), PAIR.Substring(3), out ou2))
+                {
+                    return new CoinPair((Coin)ou1, (Coin)ou2);
+                }
+                if (Enum.TryParse(typeof(Coin), PAIR.Substring(0, 4), out ou1) && Enum.TryParse(typeof(Coin), PAIR.Substring(4), out ou2))
+                {
+                    return new CoinPair((Coin)ou1, (Coin)ou2);
+                }
+                break;
+            case 8:
+                if (Enum.TryParse(typeof(Coin), PAIR.Substring(0, 4), out ou1) && Enum.TryParse(typeof(Coin), PAIR.Substring(4), out ou2))
+                {
+                    return new CoinPair((Coin)ou1, (Coin)ou2);
+                }
+                break;
         }
 
 
@@ -13954,25 +13978,30 @@ public static class KeyIndexer
         {
             key += item;
             object ou;
+            if (!NotAvaliable(key)) {
+                return null;
+            }else
             if (Enum.TryParse(typeof(Coin), key, out ou) && ou is not null) {
                 output[i++] = ou;
+                key = "";
             }
         }
         return new CoinPair((Coin)output[0], (Coin)output[1]);
     }
-}
-public class CoinPair {
-    public Coin BuyCoin;
-    public Coin SellCoin;
 
-    public CoinPair(Coin buyCoin, Coin sellCoin)
+    private static bool NotAvaliable(string coinCheck)
     {
-        BuyCoin = buyCoin;
-        SellCoin = sellCoin;
+        switch (coinCheck)
+        {
+            case "IOTA":
+                return true;
+            default:
+                break;
+        }
+        return false;
+
     }
 
-    public override string ToString()
-    {
-        return BuyCoin.ToString() + SellCoin.ToString();
-    }
+
+
 }
