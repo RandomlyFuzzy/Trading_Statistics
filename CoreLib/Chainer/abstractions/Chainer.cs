@@ -79,7 +79,10 @@ public abstract class Chainer : IChainer, ICloneable
     public double GetPrice() => price;
     public double GetFee() => fee;
     public double GetAmount() {
-        if (this.amount == 0) throw new Exception("I Amount is not set");
+        if (this.amount == 0) {
+            this.amount = 0.25;
+        }
+        //throw new Exception("I Amount is not set");
         
         return amount;
     }

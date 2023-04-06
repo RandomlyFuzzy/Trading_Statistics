@@ -8,27 +8,58 @@ PublisherUtilities.redis = ConnectionMultiplexer.Connect(SingletonUtility.REDIS_
 ChainerFactory factory = new ChainerFactory();
 
 
-IChainer temp = ChainerFactory.GetFromPairs<BuyKeyPairChainer, SellKeyPairChainer>(Coin.ETH,false, 
-    new CoinPair(Coin.ETH, Coin.BTC), 
-    new CoinPair(Coin.BTC, Coin.USDT),
-    new CoinPair(Coin.ETH, Coin.USDT) 
-    );
-Console.WriteLine();
-IChainer temp2 = ChainerFactory.GetFromPairs<BuyKeyPairChainer, SellKeyPairChainer>(Coin.BTC, false,
-    new CoinPair(Coin.ETH, Coin.BTC),
-    new CoinPair(Coin.ETH, Coin.USDT),
-    new CoinPair(Coin.BTC, Coin.USDT)
-    );
-Console.WriteLine();
+List<string> strs = new List<string>();
 
-//temp.Calculate(0.25);
+int len = Convert.ToInt32(PublisherUtilities.get("-1"));
+
+for (int i = 0; i < len; i++) {
+    strs.Add(Convert.ToString((PublisherUtilities.get(""+i))));
+}
+
+
+List<List<CoinPair>> coinPairs = new List<List<CoinPair>>();
+foreach (var item in strs) { 
+    coinPairs.Add(new List<CoinPair>());
+    string[] pairs = item.Split(" <--> ");
+    foreach (var item1 in pairs)
+    {
+        coinPairs.Last().Add(KeyIndexer.GetSymbolPair(item1));        
+    }
+}
+List<IChainer> chains = new List<IChainer>();
+
+foreach (var coinPair in coinPairs)
+{
+    chains.Add(ChainerFactory.GetFromPairs<BuyKeyPairChainer, SellKeyPairChainer>(coinPair.First().BuyCoin, true, coinPair.ToArray()));
+    chains.Add(ChainerFactory.GetFromPairs<BuyKeyPairChainer, SellKeyPairChainer>(coinPair.First().SellCoin, true, coinPair.ToArray()));
+}
+
+foreach (var coinPair in chains) { 
+    coinPair.RunLoop(0.25);
+}
+
+//IChainer temp = ChainerFactory.GetFromPairs<BuyKeyPairChainer, SellKeyPairChainer>(Coin.ETH,false, 
+//    new CoinPair(Coin.ETH, Coin.BTC), 
+//    new CoinPair(Coin.BTC, Coin.USDT),
+//    new CoinPair(Coin.ETH, Coin.USDT) 
+//);
 //Console.WriteLine();
-//temp2.Calculate(0.25);
-//return;
+
+//IChainer temp2 = ChainerFactory.GetFromPairs<BuyKeyPairChainer, SellKeyPairChainer>(Coin.BTC, false,
+//    new CoinPair(Coin.ETH, Coin.BTC),
+//    new CoinPair(Coin.ETH, Coin.USDT),
+//    new CoinPair(Coin.BTC, Coin.USDT)
+//);
+//Console.WriteLine();
+
+////temp.Calculate(0.25);
+////Console.WriteLine();
+////temp2.Calculate(0.25);
+////return;
 
 
-temp.RunLoop(0.25);
-temp2.RunLoop(0.25);
+//temp .RunLoop(0.25);
+//temp2.RunLoop(0.25);
 
 
 

@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 public enum Coin
 {
+    NONE,
+    USDT,
     BTC,
     ETH,
-    USDT,
     BNB,
     USDC,
     XRP,
@@ -4632,18 +4633,19 @@ public static class KeyIndexer
 {
     public static readonly List<string> strings = new List<string>()
     {
+     "NONE",
+     "tether",
      "bitcoin",
      "ethereum",
-     "tether",
      "bnb",
-     "usdnancoin",
+     "usd-coin",
      "xrp",
      "cardano",
      "dogecoin",
      "polygon",
      "solana",
      "binancenanusd",
-     "polkadot",
+     "polkadot-new",
      "shibananinu",
      "tron",
      "litecoin",
@@ -4694,7 +4696,7 @@ public static class KeyIndexer
      "chiliz",
      "rocketnanpool",
      "terrananclassic",
-     "curvenandaonantoken",
+     "curve-dao-token",
      "mina",
      "usdd",
      "bitcoinnansv",
@@ -9258,14 +9260,14 @@ public static class KeyIndexer
         {"ethereum",Coin.ETH},
         {"tether",Coin.USDT},
         {"bnb",Coin.BNB},
-        {"usdnancoin",Coin.USDC},
+        {"usd-coin",Coin.USDC},
         {"xrp",Coin.XRP},
         {"cardano",Coin.ADA},
         {"dogecoin",Coin.DOGE},
         {"polygon",Coin.MATIC},
         {"solana",Coin.SOL},
         {"binancenanusd",Coin.BUSD},
-        {"polkadot",Coin.DOT},
+        {"polkadot-new",Coin.DOT},
         {"shibananinu",Coin.SHIB},
         {"tron",Coin.TRX},
         {"litecoin",Coin.LTC},
@@ -9316,7 +9318,7 @@ public static class KeyIndexer
         {"chiliz",Coin.CHZ},
         {"rocketnanpool",Coin.RPL},
         {"terrananclassic",Coin.LUNC},
-        {"curvenandaonantoken",Coin.CRV},
+        {"curve-dao-token",Coin.CRV},
         {"mina",Coin.MINA},
         {"usdd",Coin.USDD},
         {"bitcoinnansv",Coin.BSV},
@@ -13995,13 +13997,13 @@ public static class KeyIndexer
         {
             case "IOTA":
                 return true;
+            case "NONE":
+                return true;
             default:
                 break;
         }
         return false;
 
     }
-
-
 
 }

@@ -312,7 +312,8 @@ public static class HelperFunctions{
     public static XmlDocument GetString(this Uri location) 
     {
         WebRequest request = WebRequest.Create(location);
-        request.Credentials = CredentialCache.DefaultCredentials; 
+        request.Credentials = CredentialCache.DefaultCredentials; try
+        {
         using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
         {
             if ((int)response.StatusCode >= 200 && (int)response.StatusCode < 300)
@@ -331,6 +332,11 @@ public static class HelperFunctions{
                 Console.WriteLine($"Failed to make GET request. Status code: {response.StatusCode}");
             }
         }
+        }catch(Exception ex)
+        {
+            Console.Error.WriteLine(ex.ToString());
+        }
+
         return null;
     }
 
@@ -348,8 +354,12 @@ public static class HelperFunctions{
         }
         return default(T);
     }
-    public static T GetJsonFromRedis<T>(this string key) {
-        return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(PublisherUtilities.get(key));
+    public static T GetJsonFromRedis<T>(this string key) where T:new() {
+        var str = PublisherUtilities.get(key);
+        if(str.IsNullOrEmpty)
+            return new T();
+
+        return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(str);
     }
     public static string GetFromRedis(this string key)
     {
