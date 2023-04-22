@@ -155,7 +155,7 @@ amt.Sort((a, b) => {
     if (a.Item2 < b.Item2) return 1;
     return -1;
 });
-amt = amt.Where(a => a.Item2 > 2).ToList();
+amt = amt.Where(a => a.Item2 >= 2).ToList();
 
 List<CoinPair> pairs = new List<CoinPair>();
 
@@ -236,8 +236,24 @@ list.Remove(Coin.BTC);
 list.Remove(Coin.USDT);
 list.Remove(Coin.ETH);
 
-
 StreamWriter sw = new StreamWriter("data.linker");
+
+
+foreach(var v in linkedPairs){
+
+    sw.WriteLine(v.BuyCoin+" <--> "+v.SellCoin);
+
+}
+
+sw.Flush();
+sw.Close();
+Console.WriteLine(list.Count);
+return;
+
+
+
+
+
 int j = 0;
 foreach (var item in list)
 {

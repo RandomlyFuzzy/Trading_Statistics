@@ -183,7 +183,8 @@ foreach (var item in amt)
     if(item.Item2<2) continue;
 
 
-    if(item.Item2>=7 || item.Item1 == "ETHBTC" || item.Item1 == "ETHUSDT" || item.Item1 == "BTCUSDT")
+    if((item.Item2>=2 )
+        && !(item.Item1.Contains("GBP")||item.Item1.Contains("EUR")||item.Item1.Contains("AUD")||item.Item1.Contains("DAI")||item.Item1.Contains("ETHW")))
     {
         subto.Add(item.Item1);
 
