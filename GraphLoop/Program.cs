@@ -155,7 +155,10 @@ amt.Sort((a, b) => {
     if (a.Item2 < b.Item2) return 1;
     return -1;
 });
-amt = amt.Where(a => a.Item2 > 2).ToList();
+
+
+
+amt = amt.Where(a => a.Item2 >= 3).ToList();
 
 List<CoinPair> pairs = new List<CoinPair>();
 
@@ -200,11 +203,9 @@ foreach (var item1 in connections.Keys)
     }
 }
 
-int min = 4;
+int min = 3;
 
 var t2 = connections.Where(a => a.Value.Count >= min);
-
-
 
 
 List<Coin> list = new List<Coin>();
@@ -232,95 +233,112 @@ foreach (var item in t2)
     }
 }
 
-list.Remove(Coin.BTC);
-list.Remove(Coin.USDT);
-list.Remove(Coin.ETH);
-
-
-StreamWriter sw = new StreamWriter("data.linker");
-int j = 0;
-foreach (var item in list)
+for(int i = 0; i < linkedPairs.Count; i++)
 {
-    foreach (var item1 in GetLoops(item))
+    if (!dict.ContainsKey(linkedPairs[i].ToString()))
+        linkedPairs[i] = linkedPairs[i].Reverse();
+
+    Console.WriteLine(linkedPairs[i].ToString());
+
+    foreach (var item in dict[linkedPairs[i].ToString()].Item2)
     {
-        string line = "";
-        foreach (var item2 in item1)
-        {
-            line += item2 + " <--> ";
-        }
-        line = line.Substring(0, line.Length - 6);
-        sw.WriteLine(line);
-        PublisherUtilities.set(""+(j++), line);
+        Console.WriteLine("\t" + item.Key);
     }
+
 }
 
+Console.WriteLine("hi");
 
-sw.WriteLine("BTCUSDT <--> ETHUSDT <--> ETHBTC");
-sw.WriteLine("ETHUSDT <--> BTCUSDT <--> ETHBTC");
-PublisherUtilities.set("" + (j++), "BTCUSDT <--> ETHUSDT <--> ETHBTC");
-PublisherUtilities.set("" + (j++), "ETHUSDT <--> BTCUSDT <--> ETHBTC");
-PublisherUtilities.set("-1", ""+j);
+//list.Remove(Coin.BTC);
+//list.Remove(Coin.USDT);
+//list.Remove(Coin.ETH);
 
 
-sw.Flush();
-sw.Close();
+//StreamWriter sw = new StreamWriter("data.linker");
+//int j = 0;
+//foreach (var item in list)
+//{
+//    foreach (var item1 in GetLoops(item))
+//    {
+//        string line = "";
+//        foreach (var item2 in item1)
+//        {
+//            line += item2 + " <--> ";
+//        }
+//        line = line.Substring(0, line.Length - 6);
+//        sw.WriteLine(line);
+//        Console.WriteLine(line);
+//        //PublisherUtilities.set(""+(j++), line);
+//    }
+//}
 
-return;
-List<List<CoinPair>> GetLoops(Coin coin) { 
-    List<List<CoinPair>> ret = new List<List<CoinPair>>();
-    List<List<CoinPair>> Computed = new List<List<CoinPair>>() {
-        new List<CoinPair>(){
-            new CoinPair(Coin.NONE, Coin.BTC),
-            new CoinPair( Coin.BTC, Coin.USDT),
-            new CoinPair( Coin.NONE, Coin.USDT)
-        },
-        new List<CoinPair>(){
-            new CoinPair(Coin.NONE, Coin.ETH),
-            new CoinPair( Coin.ETH, Coin.USDT),
-            new CoinPair( Coin.NONE, Coin.USDT)
-        },
-        new List<CoinPair>(){
-            new CoinPair(Coin.NONE, Coin.ETH),
-            new CoinPair( Coin.ETH, Coin.BTC),
-            new CoinPair( Coin.NONE, Coin.BTC)
-        },
-        new List<CoinPair>(){
-            new CoinPair(Coin.NONE, Coin.BTC),
-            new CoinPair( Coin.ETH, Coin.BTC),
-            new CoinPair( Coin.NONE, Coin.ETH)
-        },
-        new List<CoinPair>(){
-            new CoinPair( Coin.NONE, Coin.USDT),
-            new CoinPair( Coin.BTC, Coin.USDT),
-            new CoinPair(Coin.NONE, Coin.BTC)
-        },
-        new List<CoinPair>(){
-            new CoinPair( Coin.NONE, Coin.USDT),
-            new CoinPair( Coin.ETH, Coin.USDT),
-            new CoinPair(Coin.NONE, Coin.ETH)
-        },
-        new List<CoinPair>(){
-            new CoinPair( Coin.NONE, Coin.BTC),
-            new CoinPair( Coin.ETH, Coin.BTC),
-            new CoinPair(Coin.NONE, Coin.ETH)
-        },
-        new List<CoinPair>(){
-            new CoinPair( Coin.NONE, Coin.ETH),
-            new CoinPair( Coin.ETH, Coin.BTC),
-            new CoinPair(Coin.NONE, Coin.BTC)
-        }
-    };
-    foreach (var item in Computed)
-    {
-        ret.Add(PlaceEnd(coin, item));
-    }
+
+//sw.WriteLine("BTCUSDT <--> ETHUSDT <--> ETHBTC");
+//sw.WriteLine("ETHUSDT <--> BTCUSDT <--> ETHBTC");
+////PublisherUtilities.set("" + (j++), "BTCUSDT <--> ETHUSDT <--> ETHBTC");
+////PublisherUtilities.set("" + (j++), "ETHUSDT <--> BTCUSDT <--> ETHBTC");
+////PublisherUtilities.set("-1", ""+j);
+
+
+//sw.Flush();
+//sw.Close();
+//Console.WriteLine("finished");
+//return;
+//List<List<CoinPair>> GetLoops(Coin coin) { 
+//    List<List<CoinPair>> ret = new List<List<CoinPair>>();
+//    List<List<CoinPair>> Computed = new List<List<CoinPair>>() {
+//        new List<CoinPair>(){
+//            new CoinPair(Coin.NONE, Coin.BTC),
+//            new CoinPair( Coin.BTC, Coin.USDT),
+//            new CoinPair( Coin.NONE, Coin.USDT)
+//        },
+//        new List<CoinPair>(){
+//            new CoinPair(Coin.NONE, Coin.ETH),
+//            new CoinPair( Coin.ETH, Coin.USDT),
+//            new CoinPair( Coin.NONE, Coin.USDT)
+//        },
+//        new List<CoinPair>(){
+//            new CoinPair(Coin.NONE, Coin.ETH),
+//            new CoinPair( Coin.ETH, Coin.BTC),
+//            new CoinPair( Coin.NONE, Coin.BTC)
+//        },
+//        new List<CoinPair>(){
+//            new CoinPair(Coin.NONE, Coin.BTC),
+//            new CoinPair( Coin.ETH, Coin.BTC),
+//            new CoinPair( Coin.NONE, Coin.ETH)
+//        },
+//        new List<CoinPair>(){
+//            new CoinPair( Coin.NONE, Coin.USDT),
+//            new CoinPair( Coin.BTC, Coin.USDT),
+//            new CoinPair(Coin.NONE, Coin.BTC)
+//        },
+//        new List<CoinPair>(){
+//            new CoinPair( Coin.NONE, Coin.USDT),
+//            new CoinPair( Coin.ETH, Coin.USDT),
+//            new CoinPair(Coin.NONE, Coin.ETH)
+//        },
+//        new List<CoinPair>(){
+//            new CoinPair( Coin.NONE, Coin.BTC),
+//            new CoinPair( Coin.ETH, Coin.BTC),
+//            new CoinPair(Coin.NONE, Coin.ETH)
+//        },
+//        new List<CoinPair>(){
+//            new CoinPair( Coin.NONE, Coin.ETH),
+//            new CoinPair( Coin.ETH, Coin.BTC),
+//            new CoinPair(Coin.NONE, Coin.BTC)
+//        }
+//    };
+//    foreach (var item in Computed)
+//    {
+//        ret.Add(PlaceEnd(coin, item));
+//    }
    
-    return ret;
-}
+//    return ret;
+//}
 
 
-List<CoinPair> PlaceEnd(Coin c ,List<CoinPair> data) {
-    data[0].BuyCoin = c;
-    data[data.Count-1].BuyCoin = c;
-    return data;
-}
+//List<CoinPair> PlaceEnd(Coin c ,List<CoinPair> data) {
+//    data[0].BuyCoin = c;
+//    data[data.Count-1].BuyCoin = c;
+//    return data;
+//}

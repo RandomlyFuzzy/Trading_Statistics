@@ -9,18 +9,11 @@ public static class RateLimiting
 {
 
     static double                       perLimit = .8;
-    static TimeSpan Grace = new TimeSpan(0, 0, 3);
+    static TimeSpan                     Grace = new TimeSpan(0, 0, 3);
     static List<string>                 exchanges = new List<string>();
     static List<Tuple<int, TimeSpan>>   amtTimeframe = new List<Tuple<int, TimeSpan>>();
     static List<List<DateTime>>         messagesSent = new List<List<DateTime>>();
     static List<object> objs = new List<object>();
-
-
-
-
-
-
-
 
     private static void init() {
         perLimit = .8;

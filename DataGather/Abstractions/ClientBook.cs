@@ -24,8 +24,10 @@ public class ClientBook:IClient,IDisposable
         var args = Environment.GetCommandLineArgs();
 
         int i = 0;
-        if (args.Contains("-"+clientInitaials[i++]))Clients.Add(new NiceHashClient());
-        if (args.Contains("-"+clientInitaials[i++]))Clients.Add(new CryptoClient());
+        if (args.Contains("-"+clientInitaials[i++])) Clients.Add(new NiceHashClient());
+        if (args.Contains("-"+clientInitaials[i++])) Clients.Add(new CryptoClient());
+        //Clients.Add(new CryptoClient());
+
         if (args.Contains("-"+clientInitaials[i++]))Clients.Add(new BitStampClient());
         if (args.Contains("-"+clientInitaials[i++]))Clients.Add(new KrakenClient());
         if (args.Contains("-"+clientInitaials[i++]))Clients.Add(new OKXClient());

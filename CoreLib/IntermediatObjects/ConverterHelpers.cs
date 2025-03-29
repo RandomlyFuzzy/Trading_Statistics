@@ -19,11 +19,11 @@ public enum BuyDirection{
 
 public abstract class ABasic : IBasic
 {
-    protected Type GetCurret { get { return this.GetType(); } }
+    protected Type GetCurrent { get { return this.GetType(); } }
     public virtual IBasic GetObject(string message)
     {
-        MethodInfo method3 = GetCurret.GetMethod("GetObjectAs");
-        method3 = method3.MakeGenericMethod(GetCurret);
+        MethodInfo method3 = GetCurrent.GetMethod("GetObjectAs");
+        method3 = method3.MakeGenericMethod(GetCurrent);
         var oto2 = method3.Invoke(this, new object[1] { message }) as IBasic;
 
         return oto2;
@@ -39,7 +39,6 @@ public abstract class ABasic : IBasic
         string temp = "{\"m\":\"t.s\"";
         if (message.Substring(0, temp.Length) == temp) {
             temp = "";
-        
         }
 
         message = message.Trim();

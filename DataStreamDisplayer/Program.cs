@@ -183,14 +183,14 @@ foreach (var item in amt)
     if(item.Item2<2) continue;
 
 
-    if(item.Item2>=7 || item.Item1 == "ETHBTC" || item.Item1 == "ETHUSDT" || item.Item1 == "BTCUSDT")
+    if(item.Item2>=5 /*|| item.Item1 == "ETHBTC" || item.Item1 == "ETHUSDT" || item.Item1 == "BTCUSDT"*/)
     {
         subto.Add(item.Item1);
 
         foreach (var item2 in dict[item.Item1].Item2)
         {
             var trac =  _redis.GetDatabase().CreateTransaction();
-            // System.Console.WriteLine(item2.Key);
+            System.Console.WriteLine(item2.Key);
             foreach (var item3 in item2.Value)
             {
                 _redis.GetDatabase().ListLeftPush(item2.Key+"ex",item3);

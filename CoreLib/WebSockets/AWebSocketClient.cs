@@ -75,14 +75,7 @@ public abstract class AWebSocketClient<T> : IDisposable where T: class, IBasic,n
 
         if (ping)
         {
-            _timer = new System.Timers.Timer(300000);
-
-            _timer.Elapsed += (a,b) =>
-            {
-                SendAsync("ping");
-            };
-            _timer.AutoReset = true;
-            _timer.Enabled = true;
+            cli.
         }
 
         if (handle == -1)
@@ -209,6 +202,7 @@ public abstract class AWebSocketClient<T> : IDisposable where T: class, IBasic,n
             case ObjectType.TradesUpdate:
             case ObjectType.TradesSubscription:
 
+
                 MethodInfo method = typeof(ObjectDecoder).GetMethod("getAs");
                 method = method.MakeGenericMethod(message.GetTradeType());
                 var oto = method.Invoke(obj, null) as ITradeObject;
@@ -254,8 +248,6 @@ public abstract class AWebSocketClient<T> : IDisposable where T: class, IBasic,n
         lock (obj)
         {
             while (_socket.State == WebSocketState.Connecting) Thread.Sleep(1);
-
-
 
             message = message.Trim().Replace("  ", "").Replace("\n", "").Replace("\r", "").Replace("\t", " ");
             Window.SendData(handle, 3, message);
@@ -312,7 +304,9 @@ public static class HelperFunctions{
     public static XmlDocument GetString(this Uri location) 
     {
         WebRequest request = WebRequest.Create(location);
-        request.Credentials = CredentialCache.DefaultCredentials; try
+        request.Credentials = CredentialCache.DefaultCredentials; 
+        
+        try
         {
         using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
         {
@@ -369,10 +363,11 @@ public static class HelperFunctions{
 [Serializable]
 public class bnds
 {
-    public double min { get; set; } = 0;
-    public double max { get; set; } = 0;
-    public string minsrc { get; set; } = "";
-    public string maxsrc { get; set; } = "";
+    public string S { get; set; } = "";
+    public double bm { get; set; } = 0;
+    public double sm { get; set; } = 0;
+    public string ss { get; set; } = "";
+    public string bs { get; set; } = "";
 
     public bnds() { }
 }

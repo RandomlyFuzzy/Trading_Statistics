@@ -1,22 +1,14 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using System.Text;
-using System.Threading.Channels;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using StackExchange.Redis;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 public class SingletonUtility { 
     public static SingletonUtility Instance { get; private set; } = new SingletonUtility();
     public volatile int _queue = 0;
     public volatile List<Thread> threads = new List<Thread>();
 
-    public static readonly string REDIS_CONNECTION_STRING = "192.168.0.20:6379,192.168.0.21:6379,192.168.0.22:6379,abortConnect=false,connectTimeout=30000,responseTimeout=30000";
+    public static readonly string REDIS_CONNECTION_STRING = "192.168.0.7:6379,abortConnect=false,connectTimeout=30000,responseTimeout=30000";
 
 
 }

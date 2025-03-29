@@ -31,4 +31,8 @@ public class CoinPair : IEqualityComparer<CoinPair>
     {
         return BuyCoin.ToString() + SellCoin.ToString();
     }
+    public CoinPair Reverse()
+    {
+        return new CoinPair(SellCoin, BuyCoin);
+    }
 }

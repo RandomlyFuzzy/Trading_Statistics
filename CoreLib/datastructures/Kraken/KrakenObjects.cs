@@ -181,7 +181,7 @@ public class KrakenOrderBook : Kraken, IOrderBook
             var b = JsonConvert.DeserializeObject<KrakenOrderBookobject>(deserializedObject[2].ToString());
             ret.orders = new KrakenOrderBookobject();
             ret.orders.@as = a.a;
-            ret.orders.@as = b.b;
+            ret.orders.@bs = b.b;
             ret.id = b.c;
             ret.channelName = deserializedObject[3].ToString();
             ret.Symbol = deserializedObject[4].ToString();

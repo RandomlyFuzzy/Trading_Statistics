@@ -43,7 +43,6 @@ public static class Window{
 
     private async static Task UpdateTable(int handle,int index)
     {
-       
         var kKeys = clients.Keys.ToList();
         kKeys.Sort();
         string ind = keys[handle].Item1;

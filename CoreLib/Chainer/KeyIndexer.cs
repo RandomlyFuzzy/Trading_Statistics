@@ -13996,7 +13996,6 @@ public static class KeyIndexer
         switch (coinCheck)
         {
             case "IOTA":
-                return true;
             case "NONE":
                 return true;
             default:

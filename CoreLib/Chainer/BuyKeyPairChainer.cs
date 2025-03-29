@@ -41,7 +41,7 @@ public class BuyKeyPairChainer : BuyChainer
 
         var bnds = Newtonsoft.Json.JsonConvert.DeserializeObject<bnds>(json);
 
-        double price = bnds.min;
+        double price = bnds.bm;
         Set(price, fee);
         //todo update fee with src;
 

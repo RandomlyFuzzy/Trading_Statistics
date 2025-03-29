@@ -27,7 +27,15 @@ public static class RedisSubscribed
 
 
 
-    public static void SubscribeTo(string key, Action<BasicObj, byte[]> action) {
+    public static void SimpleSub(string key, Action<string, string> action)
+    {
+        sub.Subscribe(key, (a, b) =>
+        {
+            action(a.ToString(), b.ToString());
+        });
+    }
+    public static void SubscribeTo(string key, Action<BasicObj, byte[]> action)
+    {
 
         if (!dict.ContainsKey(key))
         {

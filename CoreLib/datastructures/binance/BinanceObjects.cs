@@ -20,7 +20,7 @@ public class BinanceBasicObject : ABasic
 
 
     public BasicObj GetBasic(string symbol){
-        return new TradeObj{
+        return new BasicObj{
             objType = e=="trade"?ObjectType.TradesUpdate: ObjectType.OrderbookUpdate,
             source = "binance",
             symbol = symbol

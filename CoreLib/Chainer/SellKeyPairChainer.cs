@@ -39,7 +39,7 @@ public class SellKeyPairChainer : SellChainer
 
         var bds = Newtonsoft.Json.JsonConvert.DeserializeObject<bnds>(json);
 
-        double price = bds.max;
+        double price = bds.sm;
         Set(price, fee);
 
         //todo update fee with src;

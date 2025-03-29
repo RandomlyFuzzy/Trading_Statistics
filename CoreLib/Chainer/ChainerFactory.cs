@@ -11,6 +11,8 @@ public class ChainerFactory
         var ret = new Uri($"https://crypto.com/price/{coin}").GetString();
 
         if (ret.DocumentElement is null) return "";
+
+
         XmlNode root = ret.DocumentElement;
         XmlNode node = root.SelectSingleNode("//div/h2/span");
         return node.InnerText;

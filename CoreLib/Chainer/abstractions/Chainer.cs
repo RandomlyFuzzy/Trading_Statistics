@@ -29,12 +29,11 @@ public abstract class Chainer : IChainer, ICloneable
         {
             _Pair = value;
             SetPair(Pair, Dir);
-            RedisSubscribed.SubscribeTo(Pair + "UPD", Update);
-         
+            RedisSubscribed.SimpleSub(Pair + "UPD", Update);
         }
     }
 
-    private void Update(BasicObj arg1, byte[] arg2)
+    private void Update(string arg1, string arg2)
     {
         SetPair(Pair, Dir);
         change = true;
@@ -211,11 +210,11 @@ public abstract class Chainer : IChainer, ICloneable
         switch (d)
         {
             case BuyDirection.BUY:
-                price = b.min;
+                price = b.bm;
 
                 break;
             case BuyDirection.SELL:
-                price = b.max;
+                price = b.sm;
                 break;
         }
         setTitle += " -> " + price;

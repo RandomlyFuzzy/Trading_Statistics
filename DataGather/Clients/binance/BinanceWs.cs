@@ -33,7 +33,6 @@ class BinanceWs : AWebSocketClient<BinanceBasicObject>
 
     protected override ObjectType MessageType(BinanceBasicObject message, ObjectDecoder obj)
     {
-
         if (message.result == null)
         {
             return ObjectType.None;
