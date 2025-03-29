@@ -155,9 +155,6 @@ amt.Sort((a, b) => {
     if (a.Item2 < b.Item2) return 1;
     return -1;
 });
-
-
-
 amt = amt.Where(a => a.Item2 >= 3).ToList();
 
 List<CoinPair> pairs = new List<CoinPair>();
@@ -233,7 +230,31 @@ foreach (var item in t2)
     }
 }
 
-for(int i = 0; i < linkedPairs.Count; i++)
+// for(int i = 0; i < linkedPairs.Count; i++)
+list.Remove(Coin.BTC);
+list.Remove(Coin.USDT);
+list.Remove(Coin.ETH);
+
+StreamWriter sw = new StreamWriter("data.linker");
+
+
+foreach(var v in linkedPairs){
+
+    sw.WriteLine(v.BuyCoin+" <--> "+v.SellCoin);
+
+}
+
+sw.Flush();
+sw.Close();
+Console.WriteLine(list.Count);
+return;
+
+
+
+
+
+int j = 0;
+foreach (var item in list)
 {
     if (!dict.ContainsKey(linkedPairs[i].ToString()))
         linkedPairs[i] = linkedPairs[i].Reverse();

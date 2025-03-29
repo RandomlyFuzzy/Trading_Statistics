@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 public enum Coin
 {
     NONE,
+    GBP,
+    USD,
+    EUR,
+    AUD,
     USDT,
     BTC,
     ETH,
@@ -4632,8 +4636,13 @@ public enum Coin
 public static class KeyIndexer
 {
     public static readonly List<string> strings = new List<string>()
+
     {
      "NONE",
+     "poundSterling",
+     "USD",
+     "EURO",
+     "AUSTRALIANUSD",
      "tether",
      "bitcoin",
      "ethereum",
@@ -9256,6 +9265,10 @@ public static class KeyIndexer
     };
     public static readonly Dictionary<string, Coin> reverse = new Dictionary<string, Coin>()
     {
+        {"poundSterling",Coin.GBP},
+        {"USD",Coin.USD},
+        {"EURO",Coin.EUR},
+        {"AUSTRALIANUSD",Coin.AUD},
         {"bitcoin",Coin.BTC},
         {"ethereum",Coin.ETH},
         {"tether",Coin.USDT},
