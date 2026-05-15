@@ -155,7 +155,7 @@ public interface ITradeObject {
 }
 
 
-public class BasicObjCompairer : IComparer<BasicObj>
+public class BasicObjComparer : IComparer<BasicObj>
 {
     public int Compare(BasicObj? x, BasicObj? y)
     {

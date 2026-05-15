@@ -35,7 +35,7 @@ public class ChainerFactory
 
     public static IChainer GetFromPairs<BUY, SELL>(Coin Start,bool printing, params CoinPair[] coinPair) where BUY : IChainer, new() where SELL : IChainer, new() {
         if (Start != coinPair[0].BuyCoin && Start != coinPair[0].SellCoin) {
-            throw new Exception("invalide paramiter set you must have a base currentcy of which to start");
+            throw new Exception("invalid paramiter set you must have a base currentcy of which to start");
         }
         IChainer ret;
         bool Buy = true;
@@ -81,7 +81,7 @@ public class ChainerFactory
                 }
                 else
                 {
-                    throw new Exception(" invalide Path to complete");
+                    throw new Exception(" invalid Path to complete");
                 }
             }
             else
@@ -107,7 +107,7 @@ public class ChainerFactory
                 }
                 else
                 {
-                    throw new Exception(" invalide Path to complete");
+                    throw new Exception(" invalid Path to complete");
                 }
             }
 

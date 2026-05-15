@@ -228,13 +228,7 @@ foreach (var item in exchanges)
 Console.Clear();
 object ob = new object();
 
-Dictionary<string,OrderBookCataloge> cats = new Dictionary<string, OrderBookCataloge>();
-
-// if(Directory.Exists("data")){
-//     Directory.Delete("data",true);
-// }
-// Directory.CreateDirectory("data");
-
+Dictionary<string,OrderBookCatalog> cats = new Dictionary<string, OrderBookCatalog>();
 
 _redis.GetDatabase().KeyDelete("exchanges");
 
@@ -247,7 +241,7 @@ foreach (var item in subto)
 {
     _redis.GetDatabase().ListLeftPush("exchanges", item);
 
-    cats[item] = new OrderBookCataloge(item,dict[item].Item1);
+    cats[item] = new OrderBookCatalog(item,dict[item].Item1);
     cats[item].PrintHeaders();
     RedisSubscribed.SubscribeTo(item,(obj1,b2)=>{
         updateTotalsAmounts++;

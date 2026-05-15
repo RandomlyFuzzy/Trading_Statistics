@@ -73,11 +73,6 @@ public abstract class AWebSocketClient<T> : IDisposable where T: class, IBasic,n
         }
 
 
-        if (ping)
-        {
-            cli.
-        }
-
         if (handle == -1)
         {
             handle = Window.Subscribe(Prefix);

@@ -8,7 +8,9 @@ public class SingletonUtility {
     public volatile int _queue = 0;
     public volatile List<Thread> threads = new List<Thread>();
 
-    public static readonly string REDIS_CONNECTION_STRING = "192.168.0.7:6379,abortConnect=false,connectTimeout=30000,responseTimeout=30000";
+    public static readonly string REDIS_CONNECTION_STRING =
+        Environment.GetEnvironmentVariable("REDIS_CONNECTION_STRING")
+        ?? "localhost:6379,abortConnect=false,connectTimeout=30000,responseTimeout=30000";
 
 
 }

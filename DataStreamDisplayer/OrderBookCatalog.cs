@@ -1,4 +1,4 @@
-public class OrderBookCataloge:IDisposable{
+public class OrderBookCatalog:IDisposable{
 
     string symbol = "";
     Dictionary<string,OrderBook> orderbooks = new Dictionary<string,OrderBook>();
@@ -6,7 +6,7 @@ public class OrderBookCataloge:IDisposable{
     StreamWriter sw;
     bool needHeader = false;
 
-    public OrderBookCataloge(string Symbol,List<string> exchanges){
+    public OrderBookCatalog(string Symbol,List<string> exchanges){
         this.symbol = Symbol;
         foreach(var item in exchanges){
             orderbooks[item] = new OrderBook();

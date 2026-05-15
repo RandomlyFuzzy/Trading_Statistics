@@ -247,51 +247,6 @@ foreach(var v in linkedPairs){
 sw.Flush();
 sw.Close();
 Console.WriteLine(list.Count);
-return;
-
-
-
-
-
-int j = 0;
-foreach (var item in list)
-{
-    if (!dict.ContainsKey(linkedPairs[i].ToString()))
-        linkedPairs[i] = linkedPairs[i].Reverse();
-
-    Console.WriteLine(linkedPairs[i].ToString());
-
-    foreach (var item in dict[linkedPairs[i].ToString()].Item2)
-    {
-        Console.WriteLine("\t" + item.Key);
-    }
-
-}
-
-Console.WriteLine("hi");
-
-//list.Remove(Coin.BTC);
-//list.Remove(Coin.USDT);
-//list.Remove(Coin.ETH);
-
-
-//StreamWriter sw = new StreamWriter("data.linker");
-//int j = 0;
-//foreach (var item in list)
-//{
-//    foreach (var item1 in GetLoops(item))
-//    {
-//        string line = "";
-//        foreach (var item2 in item1)
-//        {
-//            line += item2 + " <--> ";
-//        }
-//        line = line.Substring(0, line.Length - 6);
-//        sw.WriteLine(line);
-//        Console.WriteLine(line);
-//        //PublisherUtilities.set(""+(j++), line);
-//    }
-//}
 
 
 //sw.WriteLine("BTCUSDT <--> ETHUSDT <--> ETHBTC");

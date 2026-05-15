@@ -65,7 +65,8 @@ void PrintValues() {
                         });
                         obj[item.Key][val.Key] = arr.ToList();
                         Console.WriteLine(" = "+obj[item.Key][val.Key].Count+"/s");
-                        new Uri("http://192.168.0.99/give/" + item.Key + "%20" + val.Key + "/" + obj[item.Key][val.Key].Count).GetWeb();
+                        var statsEndpoint = Environment.GetEnvironmentVariable("STATS_ENDPOINT") ?? "http://localhost:5000/give/";
+                        new Uri(statsEndpoint + item.Key + "%20" + val.Key + "/" + obj[item.Key][val.Key].Count).GetWeb();
                     }
                 }
             }

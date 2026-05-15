@@ -29,4 +29,3 @@ while (!Console.KeyAvailable)
 }
 
 
-///TODO add special Identifiers for okx and multiExchange exchanges
